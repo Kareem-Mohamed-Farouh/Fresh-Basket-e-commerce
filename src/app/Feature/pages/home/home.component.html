@@ -1,0 +1,653 @@
+<section class="home">
+  <div
+    class="lg:px-[5rem] xl:px-[15rem] px-4 my-8 grid md:grid-cols-5 max-sm:grid-cols-2 sm:grid-cols-2"
+  >
+    @for (category of categories().slice(1); track $index) { @if ($index === 0)
+    {
+    <div
+      class="row-span-2 card bg-gray-100 p-3 flex flex-col gap-[1.25rem] shadow"
+    >
+      <div class="card-img-top relative">
+        <img
+          [src]="category.image"
+          class="w-full h-[13.75rem] object-contain"
+          [alt]="category.name"
+        />
+      </div>
+      <div class="card-body text-center">
+        <h3 class="text-lg font-bold">{{ category.name }}</h3>
+        <p class="text-sm text-gray-500">{{ category.slug }}</p>
+      </div>
+    </div>
+    } @else {
+    <div
+      class="card p-3 gap-[1rem] shadow shadow-gray-300 flex items-center justify-center max-sm:justify-start"
+    >
+      <div class="card-img-top relative">
+        <img
+          [src]="category.image"
+          class="w-[4.6875rem] h-[4.6875rem] object-contain"
+          [alt]="category.name"
+        />
+      </div>
+      <div class="card-body flex flex-col items-start justify-between">
+        <h3 class="text-sm font-bold h-[2.5rem]">{{ category.name }}</h3>
+        <p class="text-xs">{{ $index + 1 }} items</p>
+      </div>
+    </div>
+    } }
+  </div>
+
+  <div
+    class="grid max-sm:grid-cols-2 grid-cols-5 lg:px-[5rem] xl:px-[15rem] px-4 my-8 flex items-center justify-between gap-3"
+  >
+    <div
+      class="col-span-2 row-span-2 rounded-lg border-2 border border-red-600 overflow-hidden p-5"
+    >
+      <h4 class="text-blue-900 font-semibold text-lg mb-2">
+        Deals of the <span class="font-bold">week!</span>
+      </h4>
+      <div>
+        <span
+          class="inline-block size-[40px] bg-red-600 rounded-md text-white font-semibold text-xl flex items-center justify-center text-center"
+          >71</span
+        >
+        <span class="text-blue-900 mx-1 font-semibold text-2xl">:</span>
+        <span
+          class="inline-block size-[40px] bg-red-600 rounded-md text-white font-semibold text-xl flex items-center justify-center text-center"
+          >14</span
+        >
+        <span class="text-blue-900 mx-1 font-semibold text-2xl">:</span>
+        <span
+          class="inline-block size-[40px] bg-red-600 rounded-md text-white font-semibold text-xl flex items-center justify-center text-center"
+          >41</span
+        >
+        <span class="text-blue-900 mx-1 font-semibold text-2xl">:</span>
+        <span
+          class="inline-block size-[40px] bg-red-600 rounded-md text-white font-semibold text-xl flex items-center justify-center text-center"
+          >11</span
+        >
+      </div>
+      <p class="text-sm text-muted my-3">Remains until the end of the offer</p>
+      @for (product of products().slice(39, 40); track $index) {
+      <div class="card p-3 flex flex-col gap-[1.25rem] cursor-pointer">
+        <div class="card-img-top relative">
+          <img
+            [src]="product.imageCover"
+            class="w-full h-auto object-cover"
+            [alt]="product.title"
+          />
+          <span
+            class="absolute top-0 left-0 bg-red-600 text-white text-lg font-bold p-6 rounded-full"
+          >
+            18%
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="discount flex items-center gap-2 my-2">
+            <span class="text-gray-400 text-sm font-semibold line-through"
+              >$ {{ product.price * 1.25 }}</span
+            >
+            <span class="text-red-600 text-xl font-semibold"
+              >$ {{ product.price }}
+            </span>
+          </div>
+          <p class="card-text font-semibold text-sm line-clamp-2">
+            {{ product.description }}
+          </p>
+          <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+            product.quantity + " In stock"
+          }}</span>
+          <div class="star-review flex items-center my-2">
+            @for (star of [1,2,3,4,5]; track $index) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              class="w-4 h-4 text-[#ffcd00]"
+            >
+              <path
+                d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+              />
+            </svg>
+            }
+            <span class="text-sm text-gray-500 font-semibold">1 review</span>
+          </div>
+        </div>
+      </div>
+      <p class="uppercase font-semibold text-sm text-gray-300 mt-3 text-right">
+        Available
+        <span class="text-blue-900 text-xl font-semibold">{{
+          product.quantity
+        }}</span>
+      </p>
+      }
+      <div class="w-full bg-gray-100 rounded-full h-2.5">
+        <div
+          class="bg-gradient-to-r from-red-600 to-yellow-500 h-2.5 rounded-full"
+          style="width: 85%"
+        ></div>
+      </div>
+    </div>
+    <div
+      class="col-span-3 grid max-md:grid-cols-2 lg:grid-cols-3 md:grid-cols-2"
+    >
+      @for (product of products().slice(15, 21); track $index) {
+      <div class="card p-3 flex flex-col gap-[1.25rem] shadow shadow-gray-300">
+        <div class="card-img-top group relative cursor-pointer">
+          <div
+            class="absolute flex justify-end items-start top-0 end-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
+          >
+            <img src="/imgs/eye.gif" class="size-10 mx-auto" alt="view" />
+          </div>
+          <img
+            [src]="product.imageCover"
+            class="w-full h-auto object-cover"
+            [alt]="product.title"
+          />
+          <span
+            class="absolute top-0 left-0 bg-[#35AFA0] text-white text-xs font-bold px-3 py-1 rounded"
+          >
+            15%
+          </span>
+        </div>
+        <div class="card-body">
+          <p class="card-text font-semibold text-sm line-clamp-2">
+            {{ product.description }}
+          </p>
+          <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+            product.quantity + " In stock"
+          }}</span>
+          <div class="star-review flex items-center my-2">
+            @for (star of [1,2,3,4,5]; track $index) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              class="w-4 h-4 text-[#ffcd00]"
+            >
+              <path
+                d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+              />
+            </svg>
+            }
+            <span class="text-xs ms-2 text-gray-500 font-semibold"
+              >{{ product.ratingsQuantity }} review</span
+            >
+          </div>
+          <div class="discount text-xs flex items-center gap-2 my-2 relative">
+            <span class="text-gray-400 font-semibold line-through"
+              >$ {{ product.price * 1.25 }}</span
+            >
+            <span class="text-red-600 text-lg font-semibold"
+              >$ {{ product.price }}
+            </span>
+
+            <!-- <div class="flex items-center justify-between">
+            <i
+              (click)="addProductToWishList(product._id)"
+              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+            ></i>
+            @if(wishData !== null){ @for (data of wishData; track $index) { @if(
+            data._id == product._id ){
+
+            <i
+              (click)="removProductFromWishlist(product.id)"
+              class="absolute bottom-2 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+            ></i>
+            } @if(data._id !== product._id){
+            <i
+              (click)="addProductToWishList(product._id)"
+              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+            ></i>
+            } } }
+
+              </div> -->
+          </div>
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+
+  <div
+    class="lg:px-[5rem] xl:px-[15rem] px-4 my-8 grid md:grid-cols-2 max-sm:grid-cols-1 sm:grid-cols-2 gap-4"
+  >
+    <div class="relative">
+      <div class="img-card rounded-md overflow-hidden">
+        <img
+          src="/imgs/bacola-banner-11.jpg.png"
+          class="object-cover"
+          alt="v"
+        />
+      </div>
+      <div
+        class="text-card absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start p-[40px] gap-1 text-white text-center"
+      >
+        <h4 class="text-[#FF6048]uppercase text-sm font-semibold">
+          Weekend Discount 40%
+        </h4>
+        <h3 class="text-left text-lg font-bold text-[#3E445A]">
+          Cookie and Ice Cream
+        </h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">
+          Eat one every day.
+        </p>
+
+        <button
+          class="text-sm capitalize cursor-pointer hover:bg-blue-800 bg-[#233A95] text-white px-4 py-1 rounded-full"
+        >
+          shop now
+        </button>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="img-card rounded-md overflow-hidden">
+        <img
+          src="/imgs/bacola-banner-12.jpg.png"
+          class="object-cover"
+          alt="v"
+        />
+      </div>
+      <div
+        class="text-card absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start p-[40px] gap-1 text-white text-center"
+      >
+        <h4 class="text-[#FF6048] uppercase text-sm font-semibold">
+          Weekend Discount 40%
+        </h4>
+        <h3 class="text-left text-lg font-bold text-[#3E445A]">
+          Cookie and Ice Cream
+        </h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">
+          Eat one every day.
+        </p>
+
+        <button
+          class="text-sm capitalize cursor-pointer hover:bg-red-600 bg-[#ED174A] text-white px-4 py-1 rounded-full"
+        >
+          shop now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="lg:px-[5rem] xl:px-[15rem] bg-white px-4 my-8 flex items-center justify-between"
+  >
+    <div class="">
+      <h3 class="uppercase text-lg font-bold">Best Sellers</h3>
+      <p>Do not miss the current offers until the end of March.</p>
+    </div>
+    <div
+      class="cursor-pointer max-sm:text-xs text-gray-400 group hover:text-gray-500 text-sm text-center my-4 px-4 py-2 border hover:border-gray-500 transition-all duration-300 rounded-full"
+    >
+      View All
+      <i
+        class="transition-all duration-300 text-gray-400 group-hover:text-gray-500 ms-2 fa-solid fa-arrow-right"
+      ></i>
+    </div>
+  </div>
+
+  <!-- slider -->
+  <app-slider> </app-slider>
+
+  <div class="lg:px-[5rem] xl:px-[15rem] px-4">
+    <p
+      class="uppercase leading-[1.5rem] tracking-widest leading items-center text-center font-bold my-4 bg-[#FBEACF] rounded-lg py-[1.375rem]"
+    >
+      Super discount for your
+      <span class="font-extrabold"> first purchase.</span>
+    </p>
+  </div>
+  <!-- products -->
+  <div
+    class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0 lg:px-[5rem] xl:px-[15rem] px-4"
+  >
+    @for (product of products().slice(0,20); track $index) {
+
+    <div
+      class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] shadow shadow-gray-300"
+    >
+      <div class="card-img-top relative">
+        <div
+          class="layer absolute w-full flex flex-col items-center justify-center top-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
+        >
+          <span
+            class="flex gap-2 items-center text-xs bg-white uppercase p-2 text-[#35AFA0] border-[#35AFA0] border rounded-md my-2 font-semibold rounded-md"
+            >view DETAILS
+            <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
+          </span>
+        </div>
+        <img
+          [src]="product.imageCover"
+          class="w-full h-auto object-cover"
+          [alt]="product.title"
+        />
+        <span
+          class="absolute top-0 left-0 bg-[#35AFA0] z-[100] text-white text-xs font-bold px-3 py-1 rounded"
+        >
+          15%
+        </span>
+      </div>
+      <div class="card-body">
+        <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
+          {{ product.title }}
+        </p>
+
+        <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+          product.quantity + " In stock"
+        }}</span>
+        <div class="star-review flex items-center my-2">
+          <div class="flex gap-1 items-center">
+            @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track
+            $index) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              class="w-4 h-4 text-[#ffcd00]"
+            >
+              <path
+                d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+              />
+            </svg>
+            } @if (product.ratingsAverage % 1 !== 0) {
+            <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
+            }
+          </div>
+          <span class="flex text-xs text-gray-500">
+            {{ product.ratingsQuantity }} review</span
+          >
+        </div>
+        <div class="discount flex items-center gap-2 my-2 relative">
+          <span class="text-gray-400 text-sm font-semibold line-through"
+            >$ {{ product.price * 1.25 }}</span
+          >
+          <span class="text-red-600 text-xl font-semibold"
+            >$ {{ product.price }}
+          </span>
+
+          <!-- <div class="flex items-center justify-between">
+          <i
+            (click)="addProductToWishList(product._id)"
+            class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          ></i>
+          @if(wishData !== null){ @for (data of wishData; track $index) { @if(
+          data._id == product._id ){
+
+          <i
+            (click)="removProductFromWishlist(product._id)"
+            class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+          ></i>
+          } @if(data._id !== product._id){
+          <i
+            (click)="addProductToWishList(product._id)"
+            class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          ></i>
+          } } }
+
+            </div> -->
+        </div>
+
+        <!-- <app-addbutton label="add to cart"></app-addbutton> -->
+      </div>
+    </div>
+
+    }
+  </div>
+  <!-- defer more products -->
+
+  <div
+    class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0 lg:px-[5rem] xl:px-[15rem] px-4"
+  >
+    @defer (on interaction(el) ) { @for (product of products().slice(20); track
+    $index) {
+
+    <div
+      class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] shadow shadow-gray-300"
+    >
+      <div class="card-img-top relative">
+        <div
+          class="layer absolute w-full flex flex-col items-center justify-center top-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
+        >
+          <span
+            class="flex gap-2 items-center text-xs bg-white uppercase p-2 text-[#35AFA0] border-[#35AFA0] border rounded-md my-2 font-semibold rounded-md"
+            >view DETAILS
+            <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
+          </span>
+        </div>
+        <img
+          [src]="product.imageCover"
+          class="w-full h-auto object-cover"
+          [alt]="product.title"
+        />
+        <span
+          class="absolute top-0 left-0 bg-[#35AFA0] z-[100] text-white text-xs font-bold px-3 py-1 rounded"
+        >
+          15%
+        </span>
+      </div>
+      <div class="card-body">
+        <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
+          {{ product.title }}
+        </p>
+
+        <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+          product.quantity + " In stock"
+        }}</span>
+        <div class="star-review flex items-center my-2">
+          <div class="flex gap-1 items-center">
+            @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track
+            $index) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              class="w-4 h-4 text-[#ffcd00]"
+            >
+              <path
+                d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+              />
+            </svg>
+            } @if (product.ratingsAverage % 1 !== 0) {
+            <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
+            }
+          </div>
+          <span class="flex text-xs text-gray-500">
+            {{ product.ratingsQuantity }} review</span
+          >
+        </div>
+        <div class="discount flex items-center gap-2 my-2 relative">
+          <span class="text-gray-400 text-sm font-semibold line-through"
+            >$ {{ product.price * 1.25 }}</span
+          >
+          <span class="text-red-600 text-xl font-semibold"
+            >$ {{ product.price }}
+          </span>
+
+          <!-- <div class="flex items-center justify-between">
+          <i
+            (click)="addProductToWishList(product._id)"
+            class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          ></i>
+          @if(wishData !== null){ @for (data of wishData; track $index) { @if(
+          data._id == product._id ){
+
+          <i
+            (click)="removProductFromWishlist(product._id)"
+            class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+          ></i>
+          } @if(data._id !== product._id){
+          <i
+            (click)="addProductToWishList(product._id)"
+            class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          ></i>
+          } } }
+
+            </div> -->
+        </div>
+
+        <!-- <app-addbutton label="add to cart"></app-addbutton> -->
+      </div>
+    </div>
+
+    } }@placeholder {
+
+    <button
+      #el
+      type="button"
+      class="col-span-6 my-3 py-2 px-4 hover:bg-white border hover:text-[#35AFA0] transition-all duration-400 border-[#35AFA0] uppercase mx-auto block bg-[#35AFA0] text-white rounded-full"
+    >
+      see more product
+    </button>
+    }
+  </div>
+
+  <!-- advertisment -->
+  <div
+    class="lg:px-[5rem] xl:px-[15rem] px-4 my-8 grid md:grid-cols-3 max-sm:grid-cols-1 sm:grid-cols-2 gap-4"
+  >
+    <div class="relative card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img
+          src="/imgs/bacola-banner-05.jpg.png"
+          class="object-cover"
+          alt="v"
+        />
+      </div>
+      <div
+        class="text-card absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start p-[40px] gap-1 text-white text-center"
+      >
+        <h4 class="text-[#00b853] uppercase text-sm font-semibold">
+          Weekend Discount 40%
+        </h4>
+        <h3 class="text-left text-lg font-bold text-[#3E445A]">Natural Eggs</h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">
+          Eat one every day.
+        </p>
+
+        <button
+          routerLink="/shop"
+          class="text-sm hover:bg-gray-700 transition-all duration-400 capitalize cursor-pointer bg-[#C2C2D3] text-white px-4 py-1 rounded-full"
+        >
+          shop now
+        </button>
+      </div>
+    </div>
+    <div class="relative card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img
+          src="/imgs/bacola-banner-06.jpg.png"
+          class="object-cover"
+          alt="v"
+        />
+      </div>
+      <div
+        class="text-card absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start p-[40px] gap-1 text-white text-center"
+      >
+        <h4 class="text-[#00b853] uppercase text-sm font-semibold">
+          Weekend Discount 40%
+        </h4>
+        <h3 class="text-left text-lg font-bold text-[#3E445A]">Natural Eggs</h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">
+          Eat one every day.
+        </p>
+
+        <button
+          routerLink="/shop"
+          class="text-sm hover:bg-gray-700 transition-all duration-400 capitalize cursor-pointer bg-[#C2C2D3] text-white px-4 py-1 rounded-full"
+        >
+          shop now
+        </button>
+      </div>
+    </div>
+    <div class="relative card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img
+          src="/imgs/bacola-banner-10.jpg.png"
+          class="object-cover"
+          alt="v"
+        />
+      </div>
+      <div
+        class="text-card absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start p-[40px] gap-1 text-white text-center"
+      >
+        <h4 class="text-[#00b853] uppercase text-sm font-semibold">
+          Weekend Discount 40%
+        </h4>
+        <h3 class="text-left text-lg font-bold text-[#3E445A]">Natural Eggs</h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">
+          Eat one every day.
+        </p>
+
+        <button
+          routerLink="/shop"
+          class="text-sm hover:bg-gray-700 transition-all duration-400 capitalize cursor-pointer bg-[#C2C2D3] text-white px-4 py-1 rounded-full"
+        >
+          shop now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="lg:px-[5rem] xl:px-[15rem] px-4 my-8 grid md:grid-cols-3 max-sm:grid-cols-1 sm:grid-cols-2 gap-4"
+  >
+    <div class="card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img src="/imgs/blog-3.jpg.png" class="object-cover" alt="v" />
+      </div>
+      <div
+        class="text-card w-full flex flex-col justify-center items-start gap-2 text-white text-center"
+      >
+        <h4 class="text-gray-400 uppercase text-xs mt-2 font-semibold">
+          Grocery
+        </h4>
+        <h3
+          class="text-left text-lg leading-tight line-clamp-2 font-bold text-[#3E445A]"
+        >
+          But I must explain to you how all this mistaken idea
+        </h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">Jan 13 2025</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img src="/imgs/blog-5.jpg.png" class="object-cover" alt="v" />
+      </div>
+      <div
+        class="text-card w-full flex flex-col justify-center items-start gap-2 text-white text-center"
+      >
+        <h4 class="text-gray-400 uppercase text-xs mt-2 font-semibold">
+          Grocery
+        </h4>
+        <h3
+          class="text-left text-lg leading-tight line-clamp-2 font-bold text-[#3E445A]"
+        >
+          But I must explain to you how all this mistaken idea
+        </h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">Jan 13 2025</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="img-card rounded-md overflow-hidden">
+        <img src="/imgs/blog-1.jpg.png" class="object-cover" alt="v" />
+      </div>
+      <div
+        class="text-card w-full flex flex-col justify-center items-start gap-2 text-white text-center"
+      >
+        <h4 class="text-gray-400 uppercase text-xs mt-2 font-semibold">
+          Grocery
+        </h4>
+        <h3
+          class="text-left text-lg leading-tight line-clamp-2 font-bold text-[#3E445A]"
+        >
+          But I must explain to you how all this mistaken idea
+        </h3>
+        <p class="text-xs font-semibold text-gray-400 mb-3">Jan 13 2025</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,380 @@
+<p class="bg-[#35AFA0] text-white text-center text-sm max-sm:text-xs py-1">
+  Due to current circumstances, there may be slight delays in order processing
+</p>
+
+<div
+  class="mb-4 bg-white max-sm:mx-[1rem] sm:px-[5rem] xl:px-[15rem] p-2 shadow-sm"
+>
+  <div
+    class="font-semibold text-[.725rem] flex flex-wrap max-sm:flex-nowrap items-center"
+  >
+    <div
+      class="capitalize text-gray-700 w-full md:block md:w-auto"
+      id="navbar-dropdown"
+    >
+      <ul class="flex max-sm:space-x-2 md:space-x-4">
+        <li>
+          <a routerLink="/aboutus" class="block rounded-sm">About Us</a>
+        </li>
+        <li class="cursor-pointer">
+          <a class="block rounded-sm">Compare</a>
+        </li>
+        <li
+          class="cursor-pointer"
+          routerLink="/wishlist"
+          routerLinkActive="text-[#35AFA0]     rounded bg-[#F0FAFF]"
+        >
+          <a class="block rounded-sm"
+            >Wishlist <i class="fa-solid fa-heart fa-beat-fade"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="max-sm:hidden md:ms-auto text-gray-700">
+      <p class="flex items-center gap-1 max-sm:text-[8px]">
+        <img class="h-4 w-4" src="/images/hand.png" class="size-4" alt="hand" />
+        100% Secure delivery without contacting the courier
+      </p>
+    </div>
+    <div
+      class="max-sm:hidden md:mx-6 text-gray-700 md:border-s-2 md:border-gray-100 md:ps-2 my-1"
+    >
+      <p>
+        Need help? Call Us:
+        <span class="text-main-color font-bold">+ 0020 500</span>
+      </p>
+    </div>
+
+    <div class="flex items-center md:border-s-2 md:border-gray-100 md:ps-2">
+      <!-- زر اختيار اللغة -->
+      <button
+        id="dropdownLanguageBtn"
+        data-dropdown-toggle="dropdownLanguage"
+        class="flex items-center w-full gap-2 py-2 text-gray-900"
+      >
+        English
+        <svg
+          class="w-2.5 h-2.5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </button>
+
+      <!-- زر اختيار العملة -->
+      <button
+        id="dropdownCurrencyBtn"
+        data-dropdown-toggle="dropdownCurrency"
+        class="flex items-center w-full gap-2 py-2 px-3 text-gray-900"
+      >
+        USD
+        <svg
+          class="w-2.5 h-2.5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </button>
+
+      <!-- Dropdown الخاص باللغة -->
+      <div
+        id="dropdownLanguage"
+        class="hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+      >
+        <ul class="py-2 text-sm text-gray-700">
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >English</a
+            >
+          </li>
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >Arabic</a
+            >
+          </li>
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >French</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dropdown الخاص بالعملة -->
+      <div
+        id="dropdownCurrency"
+        class="hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+      >
+        <ul class="py-2 text-sm text-gray-700">
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >USD</a
+            >
+          </li>
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >EUR</a
+            >
+          </li>
+          <li>
+            <a
+              class="block px-4 py-2 hover:bg-[#35AFA0] hover:text-white transition-all duration-400"
+              >EGP</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-white text-sm flex max-sm:gap-1 sm:gap-3 font-semibold items-center max-sm:mx-[1rem] sm:px-[5rem] xl:px-[15rem]"
+>
+  <div class="logo max-md:hidden">
+    <a routerLink="/home" class="">
+      <img src="/images/Link - Bacola Store.png" alt="" />
+    </a>
+  </div>
+
+  <form class="w-full max-w-[763.2px]">
+    <label for="default-search" class="mb-2 text-sm font-medium sr-only"
+      >Search</label
+    >
+    <div class="relative">
+      <input
+        type="search"
+        id="default-search"
+        class="w-full max-sm:py-2 md:py-4 ring-main-color ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+        placeholder="Search Mockups, Logos..."
+        required
+      />
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+    </div>
+  </form>
+
+  <div class="desktop-links">
+    <div class="person flex justify-between gap-5 items-center">
+      <div class="flex items-center gap-4">
+        <div routerLink="/login" class="icon cursor-pointer">
+          <img class="h-4 w-4" src="/images/lll.svg" alt="" />
+        </div>
+
+        <span>$0.00</span>
+
+        <div routerLink="/cart" class="relative cart">
+          <a class="block py-2 px-3 text-red-700">
+            <img class="h-4 w-4" src="/images/cart.png" alt="" />
+          </a>
+          <span
+            class="flex items-center rounded-full bg-[#EA2B0F] h-6 w-6 justify-center text-xs font-medium text-white absolute top-0 left-8"
+            >0</span
+          >
+        </div>
+        <i
+          class="fa-solid fa-arrow-right-from-bracket cursor-pointer text-xl"
+        ></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav
+  class="sticky top-0 bg-white z-[200] px-4 py-1 max-sm:mx-[1rem] sm:px-[2rem] md:px-[5rem] xl:px-[15rem]"
+>
+  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="logo lg:hidden">
+      <a routerLink="/home" class="">
+        <img
+          src="/images/Link - Bacola Store.png"
+          class="w-[50%] object-contain"
+          alt=""
+        />
+      </a>
+    </div>
+    <button
+      data-collapse-toggle="navbar-default1"
+      type="button"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+      class="btn text-xs max-lg:hidden relative flex items-center justify-between gap-5 py-3 px-4 transition-all duration-300 rounded-full text-gray-900 p-0 md:w-auto hover:text-white hover:bg-[#35AFA0] ring-2 ring-[#35AFA0]"
+    >
+      <i class="fa-solid fa-bars"></i>ALL CATEGORIES
+      <svg
+        class="w-2.5 h-2.5 ms-2.5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 10 6"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m1 1 4 4 4-4"
+        />
+      </svg>
+
+      <div
+        id="navbar-default1"
+        class="hidden absolute top-[100%] start-[20px] font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:divide-gray-600"
+      >
+        <ul
+          class="py-2 text-sm text-[#000]"
+          aria-labelledby="dropdownLargeButton"
+        >
+          <li>
+            <a class="block px-4 py-2">Dashboard</a>
+          </li>
+          <li>
+            <a class="block px-4 py-2">Settings</a>
+          </li>
+          <li>
+            <a class="block px-4 py-2">Earnings</a>
+          </li>
+        </ul>
+      </div>
+    </button>
+
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-[#35AFA0] hover:text-white transition-all duration-400 rounded-lg md:hidden hover:bg-[#35AFc0] focus:outline-none focus:ring-2 focus:ring-[#35AFA0]"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="flex py-2 text-xs uppercase flex-col items-center flex-end max-sm:absolute start-0 end-0 transition-all z-[50] font-medium max-sm:p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-1 md:flex-row md:mt-0 md:border-0 bg-white"
+      >
+        <li class="">
+          <a
+            routerLink="/home"
+            routerLinkActive="text-[#35AFA0]     rounded bg-[#F0FAFF]"
+            class="block py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            >home</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/shop"
+            routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
+            class="block py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            >shop</a
+          >
+        </li>
+        <!-- <li>
+          <a
+            routerLink="/purchaseorder"
+            routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
+            class="flex gap-1 items-center py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            ><img class="h-4 w-4" src="/images/meaticon.png" alt="meaticon" />
+            Meats & Seafood</a
+          >
+        </li> -->
+        <li>
+          <a
+            routerLink="/chackout"
+            routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
+            class="flex gap-1 items-center py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            ><img class="h-4 w-4" src="/images/bekary.png" alt="meaticon" />
+            Bakery</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/allOrder"
+            routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
+            class="flex gap-1 items-center py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            ><i class="fas fa-truck text-xs"></i> All order</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/aboutus"
+            routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
+            class="flex gap-1 items-center py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            ><img class="h-4 w-4" src="/images/cup.png " alt="meaticon" />
+            Beverages</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/blog"
+            routerLinkActive="text-[#35AFA0]     rounded bg-[#F0FAFF]"
+            class="block py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            >Blog</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/contact"
+            routerLinkActive="text-[#35AFA0]     rounded bg-[#F0FAFF]"
+            class="block py-2 px-3 rounded-sm hover:text-[#35AFA0] transition-all hover:duration-300 hover:bg-[#F0FAFF]"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

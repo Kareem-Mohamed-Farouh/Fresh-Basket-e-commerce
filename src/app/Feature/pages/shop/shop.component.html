@@ -1,0 +1,141 @@
+<section class="shop px-4 lg:px-[5rem] xl:px-[15rem]">
+  <div class="grid grid-cols-5 gap-2">
+    <div class="max-md:col-span-4 md:col-span-1 jus">
+      <aside class="space-y-4 uppercase text-sm max-md:flex justify-between">
+        <!-- Categories -->
+        <div>
+          <h2 class="font-semibold mb-2">Product Categories</h2>
+          @for (category of categories; track $index) {
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" />
+            <span>{{ category }}</span>
+          </label>
+          }
+        </div>
+
+        <!-- Brands -->
+        <div>
+          <h2 class="font-semibold mb-2">Brands</h2>
+          @for (brand of brands; track $index) {
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" />
+            <span>{{ brand }}</span>
+          </label>
+          }
+        </div>
+      </aside>
+    </div>
+    <div class="max-md:col-span-5 col-span-4">
+      <div class="grid grid-cols-1">
+        <div class="baner">
+          <div class="relative rounded-md overflow-hidden">
+            <img src="/images/bacola-18.jpg.png" alt="bacola" />
+            <div
+              class="flex flex-col justify-center items-center absolute w-full h-full top-0 -bottom-0"
+            >
+              <div
+                class="text-gray-900 items-center flex flex-col items-start gap-2"
+              >
+                <p>Organic Meals Prepared</p>
+                <h3 class="font-bold text-lg lg:text-3xl">
+                  Delivered to <span class="text-green-400">your Home</span>
+                </h3>
+                <p class="text-gray-600 text-xs capitalize">
+                  Fully prepared & delivered nationwide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="search">
+          <div class="grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3">
+            @for (product of filteredProducts(); track product._id) {
+
+            <div
+              class="card p-3 flex flex-col gap-[1.25rem]shadow shadow-gray-300 m-1 shadow hover:shadow-lg transition-all duration-600 hover:shadow-green-400"
+            >
+              <div class="card-img-top group relative cursor-pointer">
+                <div
+                  class="absolute flex justify-end items-start top-0 end-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
+                >
+                  <img src="/imgs/eye.gif" class="size-10 mx-auto" alt="view" />
+                </div>
+                <img
+                  [src]="product.imageCover"
+                  class="w-full h-auto object-cover"
+                  [alt]="product.title"
+                />
+                <span
+                  class="absolute top-0 left-0 bg-[#35AFA0] text-white text-xs font-bold px-3 py-1 rounded"
+                >
+                  15%
+                </span>
+              </div>
+              <div class="card-body">
+                <p
+                  class="card-text h-[2.5rem] font-semibold text-sm line-clamp-2"
+                >
+                  {{ product.description }}
+                </p>
+                <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+                  product.quantity + " In stock"
+                }}</span>
+                <div class="star-review flex items-center my-2">
+                  @for (star of [1,2,3,4,5]; track $index) {
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="w-4 h-4 text-[#ffcd00]"
+                  >
+                    <path
+                      d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+                    />
+                  </svg>
+                  }
+                  <span class="text-xs ms-2 text-gray-500 font-semibold"
+                    >{{ product.ratingsQuantity }} review</span
+                  >
+                </div>
+                <div
+                  class="discount text-xs flex items-center gap-2 my-2 relative"
+                >
+                  <span class="text-gray-400 font-semibold line-through"
+                    >$ {{ product.price * 1.25 }}</span
+                  >
+                  <span class="text-red-600 text-lg font-semibold"
+                    >$ {{ product.price }}
+                  </span>
+
+                  <!-- <div class="flex items-center justify-between">
+            <i
+              (click)="addProductToWishList(product._id)"
+              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+            ></i>
+            @if(wishData !== null){ @for (data of wishData; track $index) { @if(
+            data._id == product._id ){
+
+            <i
+              (click)="removProductFromWishlist(product.id)"
+              class="absolute bottom-2 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+            ></i>
+            } @if(data._id !== product._id){
+            <i
+              (click)="addProductToWishList(product._id)"
+              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+            ></i>
+            } } }
+
+              </div> -->
+                </div>
+              </div>
+              <app-addbtn></app-addbtn>
+            </div>
+
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
