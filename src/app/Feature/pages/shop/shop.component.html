@@ -1,7 +1,9 @@
 <section class="shop px-4 lg:px-[5rem] xl:px-[15rem]">
   <div class="grid grid-cols-5 gap-2">
     <div class="max-md:col-span-4 md:col-span-1 jus">
-      <aside class="space-y-4 uppercase text-sm max-md:flex justify-between">
+      <aside
+        class="space-y-4 grid grid-cols-1 max-md:grid-cols-3 gap-4 uppercase text-sm justify-between"
+      >
         <!-- Categories -->
         <div>
           <h2 class="font-semibold mb-2">Product Categories</h2>
@@ -23,8 +25,17 @@
           </label>
           }
         </div>
+
+        <div>
+          <img
+            src="/images/sidebar-banner.gif.png"
+            class="rounded"
+            alt="sidebar-banner"
+          />
+        </div>
       </aside>
     </div>
+
     <div class="max-md:col-span-5 col-span-4">
       <div class="grid grid-cols-1">
         <div class="baner">
@@ -47,9 +58,53 @@
             </div>
           </div>
         </div>
+        <div class="my-3">
+          <label
+            for="default-search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only"
+            >Search</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              [(ngModel)]="searshWord"
+              type="search"
+              id="default-search"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-green-500 focus:outline-[var(--color-main-color)] focus:border-green-500"
+              placeholder="Search by title of prooduct..."
+              required
+            />
+            <div
+              class="text-white cursor-pointer absolute end-2.5 bottom-2.5 bg-[var(--color-main-color)] hover:bg-green-800 focus:ring-4 focus:outline-[var(--color-main-color)] focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2"
+            >
+              Search
+              {{ searshWord() }}
+            </div>
+          </div>
+        </div>
+
         <div class="search">
           <div class="grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3">
-            @for (product of filteredProducts(); track product._id) {
+            @for (product of filteredProducts()|search :searshWord(); track
+            product._id) {
 
             <div
               class="card p-3 flex flex-col gap-[1.25rem]shadow shadow-gray-300 m-1 shadow hover:shadow-lg transition-all duration-600 hover:shadow-green-400"
@@ -129,7 +184,7 @@
               </div> -->
                 </div>
               </div>
-              <app-addbtn></app-addbtn>
+              <app-addbtn [productid]="product._id"></app-addbtn>
             </div>
 
             }

@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -29,6 +29,14 @@ export const routes: Routes = [
         (c) => c.HomeComponent
       ),
     title: 'home',
+  },
+  {
+    path: 'productdetails/:id',
+    loadComponent: () =>
+      import('./Feature/pages/prodetails/prodetails.component').then(
+        (c) => c.ProdetailsComponent
+      ),
+    title: 'productdetails',
   },
   {
     path: 'shop',
@@ -87,7 +95,7 @@ export const routes: Routes = [
     title: 'allorders',
   },
   {
-    path: 'checkout',
+    path: 'checkout/:id',
     loadComponent: () =>
       import('./Feature/pages/checkout/checkout.component').then(
         (c) => c.CheckoutComponent

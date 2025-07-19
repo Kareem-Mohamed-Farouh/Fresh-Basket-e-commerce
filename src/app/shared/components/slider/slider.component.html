@@ -23,6 +23,9 @@
           </span>
         </div>
         <div class="card-body">
+          <h4 class="card-text font-semibold text-sm mb-1 text-[#35AFA0]">
+            {{ product.title.split(" ", 3).join(" ") }}
+          </h4>
           <p class="card-text h-[2.5rem] font-semibold text-sm line-clamp-2">
             {{ product.description }}
           </p>
@@ -76,7 +79,7 @@
               </div> -->
           </div>
         </div>
-        <app-addbtn></app-addbtn>
+        <app-addbtn [productid]="product._id"></app-addbtn>
       </div>
     </ng-template>
     }

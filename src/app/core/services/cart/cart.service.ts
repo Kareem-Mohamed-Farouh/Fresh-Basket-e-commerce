@@ -1,27 +1,52 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  inject,
+  Inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { Http2SecureServer } from 'http2';
 import { Observable } from 'rxjs';
 import { environment } from '../../base/environments/baseurl.environment';
 import { cartEndPoint } from '../../base/enums/cart.endPoint';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private httpClient: HttpClient) {}
+  numOfCartItem: WritableSignal<number> = signal<number>(0);
+  totalCartPric: WritableSignal<number> = signal<number>(0);
+  private readonly httpClient = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
 
-  addProductToCart(productId: string): Observable<any> {
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.getLogedUserCart().subscribe({
+        next: (res) => {
+          // console.log('ress', res.numOfCartItems);
+          this.numOfCartItem.set(res.numOfCartItems);
+          this.totalCartPric.set(res.data.totalCartPrice);
+        },
+      });
+    }
+  }
+
+  addProductToCart(Id: string): Observable<any> {
     return this.httpClient.post(
       `${environment.baseUrl}${cartEndPoint.addToCart}`,
-      { productId: productId }
+      {
+        productId: Id,
+      }
     );
   }
 
-  updateCartProductQuantity(count: string, productId: string): Observable<any> {
+  updateCartProductQuantity(cont: number, productid: string): Observable<any> {
     return this.httpClient.put(
-      `${environment.baseUrl}${cartEndPoint.updateCartQuantity}productId`,
-      { count: count }
+      `${environment.baseUrl}${cartEndPoint.updateCartQuantity}${productid}`,
+      { count: cont }
     );
   }
 
@@ -33,7 +58,7 @@ export class CartService {
 
   RemoveSpecificCartItem(productId: string): Observable<any> {
     return this.httpClient.delete(
-      `${environment.baseUrl}${cartEndPoint.removeSpecificCartItem}productId`
+      `${environment.baseUrl}${cartEndPoint.removeSpecificCartItem}${productId}`
     );
   }
   crealCart(): Observable<any> {

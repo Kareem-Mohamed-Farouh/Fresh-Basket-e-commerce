@@ -27,7 +27,7 @@ export class SliderComponent implements OnInit {
   getAllProductData() {
     this.productsService.getAllProducts().subscribe({
       next: (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.products.set(res.data);
       },
     });
@@ -47,7 +47,7 @@ export class SliderComponent implements OnInit {
     ],
     responsive: {
       0: {
-        items: 1,
+        items: 2,
       },
       400: {
         items: 2,

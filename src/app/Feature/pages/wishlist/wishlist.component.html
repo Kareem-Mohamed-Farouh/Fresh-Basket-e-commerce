@@ -1,1 +1,143 @@
-<p>wishlist works!</p>
+<section class="px-4 sm:px-[2rem] lg:px-[5rem] xl:px-[10rem]">
+  <h1 class="my-6 uppercase text-5xl font-extrabold text-center">
+    Wis<span class="main-color">hL</span>ist
+  </h1>
+  @if(wishlistData() !== []){
+  <div class="grid grid-cols-2 max-sm:grid-cols-1 p-5">
+    @for( item of wishlistData() ;track $index){
+    <div class="sm:p-5 max-sm:p-1 border-[#35AFA0] shadow-sm shadow-[#35AFA0]">
+      <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
+        <owl-carousel-o [options]="customOptions">
+          @for (iteme of item.images; track $index) {
+          <ng-template carouselSlide>
+            <img
+              [src]="[
+                'https://ecommerce.routemisr.com/Route-Academy-products/' +
+                  iteme
+              ]"
+              alt="Product"
+              class="border h-[250px] object-cover w-full rounded-lg cursor-pointer"
+            />
+          </ng-template>
+          }
+        </owl-carousel-o>
+        <hr class="max-md:hidden border-gray-300" />
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-sm:gap-4 p-3">
+          <!-- <div
+            class="rounded-lg overflow-hidden text-center flex justify-center p-2"
+          >
+            <img
+              [src]="item.imageCover"
+              class="h-[250px] object-contain rounded-lg cursor-pointer"
+              alt=""
+            />
+          </div> -->
+          <div class="w-full lg:col-span-2 px-4">
+            <div class="mb-3">
+              <h3 class="line-clamp-1 text-lg font-bold dark:[#35AFA0]">
+                {{ item.title }}
+              </h3>
+              <p class="text-gray-500 text-sm line-clamp-2 h-[40px]">
+                {{ item.description }}
+              </p>
+
+              <div class="flex justify-between items-start mt-1">
+                <h4 class="md:text-lg font-bold text-gray-600">
+                  Category : {{ item.category.name }}
+                </h4>
+                <div class="flex items-center space-x-1">
+                  @for (item of [1,2,3,4,5].slice(0,item.ratingsAverage) ; track
+                  $index) {
+
+                  <svg
+                    class="w-4 h-4 fill-yellow-400"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
+                  </svg>
+
+                  }
+                  <p class="text-sm !ml-3">({{ item.ratingsAverage }})</p>
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="flex my-1 items-center">
+                  <span class="md:text-lg font-bold text-gray-600">
+                    Brand :</span
+                  >
+                  <img
+                    [src]="item.brand.image"
+                    class="w-[25%] rounded-lg -lg object-contain"
+                    alt="item.brand.name"
+                  />
+                </div>
+
+                <p
+                  class="max-sm:text-sm flex items-center gap-1 text-[#35AFA0] md:text-lg font-bold"
+                >
+                  <span> Price </span>
+                  <span class="ms-1"> {{ item.priceAfterDiscount }}</span>
+
+                  <span class="line-through text-sm text-gray-500">{{
+                    item.price | currency
+                  }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="my-3 flex gap-4">
+              <button
+                (click)="removProductFromWishlist(item._id)"
+                type="button"
+                class="md:px-4 md:py-3 w-full max-sm:px-2 max-sm:py-1 rounded-lg capitalize border bg-white hover:bg-red-600 text-red-800 hover:text-white duration-500 text-xs font-semibold"
+              >
+                remove from wishlist
+              </button>
+              <button
+                (click)="addItemToCart(item._id)"
+                type="button"
+                class="md:px-4 capitalize rounded-lg w-full rounded-lg hover:text-[#35AFA0] hover:bg-white hover:border-[#35AFA0] border transition-all duration-400 md:py-3 max-sm:px-2 max-sm:py-1 border border-[#35AFA0] bg-[#35AFA0] duration-500 hover:bg-[#35AFA0] text-white text-xs font-semibold"
+              >
+                Add to cart
+                <i class="font-semibold text-xl fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }@empty {
+
+    <div class="flex justify-center">
+      <img
+        src="/imgs/no_wish_list.png"
+        class="w-[30%] object-contain"
+        alt="no wish list data"
+      />
+    </div>
+    <div class="flex justify-center">
+      <img
+        src="/imgs/no_wish_list.png"
+        class="w-[30%] object-contain"
+        alt="no wish list data"
+      />
+    </div>
+
+    }
+  </div>
+  }@else {
+
+  <div class="flex justify-center">
+    <img
+      src="/imgs/no_wish_list.png"
+      class="w-[30%] object-contain"
+      alt="no wish list data"
+    />
+  </div>
+  }
+</section>
