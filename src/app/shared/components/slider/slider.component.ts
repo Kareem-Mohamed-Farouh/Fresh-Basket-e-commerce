@@ -39,8 +39,11 @@ export class SliderComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     autoplay: true,
+    autoplayTimeout: 2000,
+    autoplaySpeed: 700,
     dots: false,
-    navSpeed: 700,
+    smartSpeed: 500,
+    navSpeed: 500,
     navText: [
       '<i class="fa-solid fa-angle-left"></i>',
       '<i class="fa-solid fa-angle-right"></i>',
