@@ -25,7 +25,7 @@ export class AddbtnComponent {
 
   addToCART(): void {
     // console.log(this.productid);
-    if (this.authService.Token()) {
+    if (localStorage.getItem('basketToken')) {
       this.cartService.addProductToCart(this.productid()).subscribe({
         next: (res) => {
           // console.log(res);

@@ -21,6 +21,7 @@ export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   userToken: WritableSignal<string> = signal<string>('');
+  Token: WritableSignal<string> = signal<string>('');
 
   loginForm: FormGroup = this.formBuilder.group({
     email: [null, [Validators.email, Validators.required]],
@@ -37,7 +38,7 @@ export class LoginComponent {
           // console.log(res);
           if (res.message == 'success') {
             this.userToken.set(res.token);
-            this.authService.Token.set(this.userToken());
+            this.Token.set(this.userToken());
             localStorage.setItem('basketToken', res.token);
             this.decode();
             this.router.navigate(['/home']);

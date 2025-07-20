@@ -10,6 +10,11 @@ import { ICart, Product2 } from '../../../shared/interfaces/icart';
 import { SearchPipe } from '../../../shared/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../../core/services/wishlist/wishlist.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import { Subscription } from 'rxjs';
+import { IWishlist } from '../../../shared/interfaces/Iwishlist';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +27,7 @@ export class ShopComponent {
   searshWord: WritableSignal<string> = signal<string>('');
   // Products shown after filters/search/sorting applied
   filteredProducts: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
-
+  wishlistData: WritableSignal<IWishlist[]> = signal<IWishlist[]>([]);
   // Available categories and brands for filtering
   categories: string[] = [];
   brands: string[] = [];
@@ -31,10 +36,14 @@ export class ShopComponent {
   selectedBrands = new Set<string>();
   selectCategory = new Set<string>();
   private readonly cartService = inject(CartService);
+  private readonly wishlistService = inject(WishlistService);
+  private readonly authService = inject(AuthService);
   private readonly productsService = inject(ProductsService);
-
+  private readonly toastrService = inject(ToastrService);
+  subescribtios: Subscription = new Subscription();
   ngOnInit(): void {
     this.getAllProductData();
+    this.getwishlistData();
   }
 
   // getcartItemInfo() {
@@ -45,6 +54,45 @@ export class ShopComponent {
   //     },
   //   });
   // }
+  getwishlistData() {
+    this.subescribtios = this.wishlistService.getProductInWishlist().subscribe({
+      next: (res) => {
+        if (res.status == 'success') {
+          console.log('RES WISHLIST', res);
+          // this.res = res;
+          this.wishlistData.set(res.data);
+          this.wishlistService.Wishlistcount.set(res.count);
+        }
+      },
+    });
+  }
+  addProductToWishList(productid: string) {
+    if (localStorage.getItem('basketToken')) {
+      this.subescribtios = this.wishlistService
+        .addProductToWishlist(productid)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            this.getwishlistData();
+            this.toastrService.success(res.message);
+          },
+        });
+    } else {
+      this.toastrService.error('you are Not logedin signin to add in wishlist');
+    }
+  }
+
+  removProductFromWishlist(productid: string) {
+    this.subescribtios = this.wishlistService
+      .removeProductFromWishlist(productid)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getwishlistData();
+          this.toastrService.success(res.message);
+        },
+      });
+  }
 
   getAllProductData() {
     this.productsService.getAllProducts().subscribe({

@@ -5,6 +5,7 @@ import {
   Component,
   Inject,
   inject,
+  OnDestroy,
   OnInit,
   signal,
   WritableSignal,
@@ -21,6 +22,7 @@ import { WishlistService } from '../../../core/services/wishlist/wishlist.servic
 import { IWishlist } from '../../../shared/interfaces/Iwishlist';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -35,24 +37,27 @@ import { AuthService } from '../../../core/services/auth/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   products: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
   categories: WritableSignal<Icategory[]> = signal<Icategory[]>([]);
   wishlistData: WritableSignal<IWishlist[]> = signal<IWishlist[]>([]);
   private readonly productsService = inject(ProductsService);
   private readonly toastrService = inject(ToastrService);
   private readonly categoryService = inject(CategoryService);
-  // res: IWishstatues = {} as IWishstatues;
   private readonly wishlistService = inject(WishlistService);
   private readonly authService = inject(AuthService);
+  subescribtios: Subscription = new Subscription();
+
   ngOnInit(): void {
     this.getAllProductData();
     this.getALLCategoryData();
-    this.getwishlistData();
+    if (localStorage.getItem('basketToken')) {
+      this.getwishlistData();
+    }
   }
 
   getAllProductData() {
-    this.productsService.getAllProducts().subscribe({
+    this.subescribtios = this.productsService.getAllProducts().subscribe({
       next: (res) => {
         // console.log(res);
         this.products.set(res.data);
@@ -60,46 +65,53 @@ export class HomeComponent implements OnInit {
     });
   }
   getALLCategoryData() {
-    this.categoryService.getAllCategory().subscribe({
+    this.subescribtios = this.categoryService.getAllCategory().subscribe({
       next: (res) => {
         // console.log(res);
         this.categories.set(res.data);
       },
     });
   }
+
   getwishlistData() {
-    this.wishlistService.getProductInWishlist().subscribe({
+    this.subescribtios = this.wishlistService.getProductInWishlist().subscribe({
       next: (res) => {
-        // console.log('RES WISHLIST', res);
-        // this.res = res;
-        this.wishlistData.set(res.data);
-        this.wishlistService.Wishlistcount.set(res.count);
+        if (res.status == 'success') {
+          console.log('RES WISHLIST', res);
+          // this.res = res;
+          this.wishlistData.set(res.data);
+          this.wishlistService.Wishlistcount.set(res.count);
+        }
       },
     });
   }
 
   addProductToWishList(productid: string) {
-    if (this.authService.Token()) {
-      this.wishlistService.addProductToWishlist(productid).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.getwishlistData();
-          this.toastrService.success(res.message);
-        },
-      });
+    if (localStorage.getItem('basketToken')) {
+      this.subescribtios = this.wishlistService
+        .addProductToWishlist(productid)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            this.getwishlistData();
+            this.toastrService.success(res.message);
+          },
+        });
     } else {
       this.toastrService.error('you are Not logedin signin to add in wishlist');
     }
   }
 
   removProductFromWishlist(productid: string) {
-    this.wishlistService.removeProductFromWishlist(productid).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getwishlistData();
-        this.toastrService.success(res.message);
-      },
-    });
+    this.subescribtios = this.wishlistService
+      .removeProductFromWishlist(productid)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getwishlistData();
+          this.toastrService.success(res.message);
+        },
+      });
   }
 
   customOptions: OwlOptions = {
@@ -129,4 +141,10 @@ export class HomeComponent implements OnInit {
     },
     nav: true,
   };
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subescribtios.unsubscribe();
+  }
 }

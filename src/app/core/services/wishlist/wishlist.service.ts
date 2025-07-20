@@ -22,8 +22,10 @@ export class WishlistService {
     if (isPlatformBrowser(this.pLATFORM_ID)) {
       this.getProductInWishlist().subscribe({
         next: (res) => {
-          console.log('rr', res);
-          this.Wishlistcount.set(res.count);
+          if (res.status == 'success') {
+            // console.log('res', res);
+            this.Wishlistcount.set(res.count);
+          }
         },
       });
     }

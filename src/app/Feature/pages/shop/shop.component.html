@@ -181,26 +181,25 @@
                     >$ {{ product.price }}
                   </span>
 
-                  <!-- <div class="flex items-center justify-between">
-            <i
-              (click)="addProductToWishList(product._id)"
-              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-            ></i>
-            @if(wishData !== null){ @for (data of wishData; track $index) { @if(
-            data._id == product._id ){
+                  <div class="flex items-center justify-between">
+                    <i
+                      (click)="addProductToWishList(product._id)"
+                      class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+                    ></i>
+                    @if(wishlistData() !== null){ @for (data of wishlistData();
+                    track $index) { @if( data._id == product._id ){
 
-            <i
-              (click)="removProductFromWishlist(product.id)"
-              class="absolute bottom-2 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
-            ></i>
-            } @if(data._id !== product._id){
-            <i
-              (click)="addProductToWishList(product._id)"
-              class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-            ></i>
-            } } }
-
-              </div> -->
+                    <i
+                      (click)="removProductFromWishlist(product.id)"
+                      class="absolute bottom-2 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+                    ></i>
+                    } @if(data._id !== product._id){
+                    <i
+                      (click)="addProductToWishList(product._id)"
+                      class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+                    ></i>
+                    } } }
+                  </div>
                 </div>
               </div>
               <app-addbtn [productid]="product._id"></app-addbtn>
