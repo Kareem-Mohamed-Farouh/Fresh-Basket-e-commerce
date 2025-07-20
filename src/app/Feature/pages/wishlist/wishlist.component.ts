@@ -29,6 +29,7 @@ export class WishlistComponent {
         console.log('RES', res);
         // this.res = res;
         this.wishlistData.set(res.data);
+        this.wishlistService.Wishlistcount.set(res.count);
       },
     });
   }
@@ -37,7 +38,9 @@ export class WishlistComponent {
     this.cartService.addProductToCart(productId).subscribe({
       next: (res) => {
         if (res.status == 'success') {
-          // console.log(res);
+          this.cartService.numOfCartItem.set(res.numOfCartItems);
+          this.cartService.totalCartPric.set(res.data.totalCartPrice);
+          console.log(res);
           this.cartService.numOfCartItem.set(res.numOfCartItems);
           this.toastrService.success(res.message, '', {
             positionClass: 'toast-bottom-right',
@@ -53,7 +56,7 @@ export class WishlistComponent {
     this.wishlistService.removeProductFromWishlist(idprodd).subscribe({
       next: (res) => {
         if (res.status == 'success') {
-          // console.log('res', res);
+          console.log('res', res);
           this.toastrService.info(res.message, '', {
             positionClass: 'toast-bottom-right',
             progressAnimation: 'increasing',
