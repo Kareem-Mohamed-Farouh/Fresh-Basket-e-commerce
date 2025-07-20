@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../base/environments/baseurl.environment';
 import { authEndPoint } from '../../base/enums/auth.endpoint';
@@ -9,7 +9,7 @@ import { authEndPoint } from '../../base/enums/auth.endpoint';
 })
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
-
+  Token: WritableSignal<string> = signal<string>('');
   signup(userData: object): Observable<any> {
     return this.httpClient.post(
       `${environment.baseUrl}${authEndPoint.signUp}`,

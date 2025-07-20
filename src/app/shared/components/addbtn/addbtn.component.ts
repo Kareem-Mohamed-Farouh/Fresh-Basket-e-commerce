@@ -1,7 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input, InputSignal } from '@angular/core';
 import { CartService } from '../../../core/services/cart/cart.service';
-import { log } from 'console';
+
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-addbtn',
@@ -11,27 +12,35 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddbtnComponent {
   private readonly toastrService = inject(ToastrService);
+  private readonly authService = inject(AuthService);
 
-  @Input() label: string = 'add to cart';
-  @Input() productid!: string;
+  // @Input() label: string = 'add to cart';
+  // @Input() productid!: string;
+
+  // performence in the sky
+  label: InputSignal<string> = input('add to cart');
+  productid: InputSignal<string> = input('');
 
   private readonly cartService = inject(CartService);
 
   addToCART(): void {
     // console.log(this.productid);
-
-    this.cartService.addProductToCart(this.productid).subscribe({
-      next: (res) => {
-        // console.log(res);
-        if (res.status == 'success') {
-          this.toastrService.success(res.message, '', {
-            positionClass: 'toast-bottom-right',
-            progressAnimation: 'increasing',
-          });
-          this.cartService.numOfCartItem.set(res.numOfCartItems);
-          this.cartService.totalCartPric.set(res.data.totalCartPrice);
-        }
-      },
-    });
+    if (this.authService.Token()) {
+      this.cartService.addProductToCart(this.productid()).subscribe({
+        next: (res) => {
+          // console.log(res);
+          if (res.status == 'success') {
+            this.toastrService.success(res.message, '', {
+              positionClass: 'toast-bottom-right',
+              progressAnimation: 'increasing',
+            });
+            this.cartService.numOfCartItem.set(res.numOfCartItems);
+            this.cartService.totalCartPric.set(res.data.totalCartPrice);
+          }
+        },
+      });
+    } else {
+      this.toastrService.error('you are Not loggedin signin to add in CART');
+    }
   }
 }

@@ -83,6 +83,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "fileReplacements": [
+              {
+                "replace": "./src/app/core/base/environments/baseurl.environment.ts",
+                "with": "./src/app/core/base/environments/baseURL.production.ts"
+              }
+            ],
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",

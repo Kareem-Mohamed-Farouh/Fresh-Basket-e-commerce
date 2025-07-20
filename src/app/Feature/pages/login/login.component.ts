@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -36,11 +37,18 @@ export class LoginComponent {
           // console.log(res);
           if (res.message == 'success') {
             this.userToken.set(res.token);
+            this.authService.Token.set(this.userToken());
             localStorage.setItem('basketToken', res.token);
+            this.decode();
             this.router.navigate(['/home']);
           }
         },
       });
     }
+  }
+  cc!: any;
+  decode() {
+    this.cc = jwtDecode(localStorage.getItem('basketToken')!);
+    console.log(this.cc);
   }
 }

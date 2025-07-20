@@ -20,6 +20,7 @@ import { StaticsliderComponent } from '../../../shared/components/staticslider/s
 import { WishlistService } from '../../../core/services/wishlist/wishlist.service';
 import { IWishlist } from '../../../shared/interfaces/Iwishlist';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -37,12 +38,13 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit {
   products: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
   categories: WritableSignal<Icategory[]> = signal<Icategory[]>([]);
+  wishlistData: WritableSignal<IWishlist[]> = signal<IWishlist[]>([]);
   private readonly productsService = inject(ProductsService);
   private readonly toastrService = inject(ToastrService);
   private readonly categoryService = inject(CategoryService);
-  wishlistData: WritableSignal<IWishlist[]> = signal<IWishlist[]>([]);
   // res: IWishstatues = {} as IWishstatues;
   private readonly wishlistService = inject(WishlistService);
+  private readonly authService = inject(AuthService);
   ngOnInit(): void {
     this.getAllProductData();
     this.getALLCategoryData();
@@ -76,9 +78,29 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addProductToWishList(product: string) {}
+  addProductToWishList(productid: string) {
+    if (this.authService.Token()) {
+      this.wishlistService.addProductToWishlist(productid).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getwishlistData();
+          this.toastrService.success(res.message);
+        },
+      });
+    } else {
+      this.toastrService.error('you are Not logedin signin to add in wishlist');
+    }
+  }
 
-  removProductFromWishlist(product: string) {}
+  removProductFromWishlist(productid: string) {
+    this.wishlistService.removeProductFromWishlist(productid).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getwishlistData();
+        this.toastrService.success(res.message);
+      },
+    });
+  }
 
   customOptions: OwlOptions = {
     loop: true,

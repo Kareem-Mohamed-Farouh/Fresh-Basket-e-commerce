@@ -9,10 +9,11 @@ import { CartService } from '../../../core/services/cart/cart.service';
 import { ICart, Product2 } from '../../../shared/interfaces/icart';
 import { SearchPipe } from '../../../shared/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
-  imports: [AddbtnComponent, SearchPipe, FormsModule],
+  imports: [AddbtnComponent, SearchPipe, FormsModule, RouterLink],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
@@ -60,5 +61,9 @@ export class ShopComponent {
         this.brands = [...new Set(this.products().map((p) => p.brand.name))];
       },
     });
+  }
+  translate: WritableSignal<boolean> = signal<boolean>(true);
+  toggel() {
+    this.translate.update((t) => !t);
   }
 }

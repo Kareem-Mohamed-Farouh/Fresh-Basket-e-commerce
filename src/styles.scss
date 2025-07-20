@@ -15,6 +15,11 @@
   color: var(--color-main-color);
 }
 
+body,
+:root {
+  scroll-behavior: smooth;
+}
+
 .owl-theme .owl-nav [class*="owl-"] {
   background-color: white;
   color: black;
@@ -43,14 +48,14 @@
 .owl-nav .owl-prev {
   position: absolute;
   top: 50%;
-  left: 2%;
-  transform: translate(50%, -50%);
+  left: 0rem;
+  transform: translate(0%, -50%);
 }
 .owl-nav .owl-next {
   position: absolute;
   top: 50%;
-  right: 2%;
-  transform: translate(-50%, -50%);
+  right: 0rem;
+  transform: translate(0%, -50%);
 }
 
 // toastr

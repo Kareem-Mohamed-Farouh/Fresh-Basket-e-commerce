@@ -1,37 +1,53 @@
 <section class="shop px-4 lg:px-[5rem] xl:px-[15rem]">
   <div class="grid grid-cols-5 gap-2">
-    <div class="max-md:col-span-4 md:col-span-1 jus">
+    <div class="max-md:col-span-4 md:col-span-1 relative">
       <aside
-        class="space-y-4 grid grid-cols-1 max-md:grid-cols-3 gap-4 uppercase text-sm justify-between"
+        [class.max-md:translate-x-[-100%]]="translate()"
+        class="transition-all duration-300 space-y-4 p-5 grid grid-cols-1 max-md:fixed z-[200] start-0 top-0 max-md:bg-white gap-4 uppercase text-sm justify-between"
       >
-        <!-- Categories -->
-        <div>
-          <h2 class="font-semibold mb-2">Product Categories</h2>
-          @for (category of categories; track $index) {
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" />
-            <span>{{ category }}</span>
-          </label>
-          }
-        </div>
+        <div class="space-y-4 relative">
+          <button
+            (click)="toggel()"
+            class="cursor-pointer md:hidden size-[3.125rem] bg-green-700 absolute rounded-full end-[-3rem] top-[30%]"
+          >
+            @if(translate()){
 
-        <!-- Brands -->
-        <div>
-          <h2 class="font-semibold mb-2">Brands</h2>
-          @for (brand of brands; track $index) {
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" />
-            <span>{{ brand }}</span>
-          </label>
-          }
-        </div>
+            <i class="text-xl text-white font-bold ms-3 fa fa-angle-right"></i>
+            }@else {
+            <i class="text-xl text-white font-bold ms-3 fa fa-angle-left"></i>
 
-        <div>
-          <img
-            src="/images/sidebar-banner.gif.png"
-            class="rounded"
-            alt="sidebar-banner"
-          />
+            }
+          </button>
+
+          <div class="">
+            <h2 class="font-semibold mb-2">Product Categories</h2>
+            @for (category of categories; track $index) {
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" />
+              <span>{{ category }}</span>
+            </label>
+            }
+          </div>
+          <!-- Categories -->
+
+          <!-- Brands -->
+          <div>
+            <h2 class="font-semibold mb-2">Brands</h2>
+            @for (brand of brands; track $index) {
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" />
+              <span>{{ brand }}</span>
+            </label>
+            }
+          </div>
+
+          <div>
+            <img
+              src="/images/sidebar-banner.gif.png"
+              class="rounded"
+              alt="sidebar-banner"
+            />
+          </div>
         </div>
       </aside>
     </div>
@@ -109,7 +125,10 @@
             <div
               class="card p-3 flex flex-col gap-[1.25rem]shadow shadow-gray-300 m-1 shadow hover:shadow-lg transition-all duration-600 hover:shadow-green-400"
             >
-              <div class="card-img-top group relative cursor-pointer">
+              <div
+                [routerLink]="['/productdetails', product._id]"
+                class="card-img-top group relative cursor-pointer"
+              >
                 <div
                   class="absolute flex justify-end items-start top-0 end-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
                 >

@@ -2,7 +2,7 @@
   <h1 class="my-6 uppercase text-5xl font-extrabold text-center">
     Wis<span class="main-color">hL</span>ist
   </h1>
-  @if(wishlistData() !== []){
+  @if(wishlistData() !== [] ){
   <div class="grid grid-cols-2 max-sm:grid-cols-1 p-5">
     @for( item of wishlistData() ;track $index){
     <div class="sm:p-5 max-sm:p-1 border-[#35AFA0] shadow-sm shadow-[#35AFA0]">
@@ -113,31 +113,14 @@
     </div>
     }@empty {
 
-    <div class="flex justify-center">
+    <div class="col-span-2 ma-sm:col-span-1 flex justify-center">
       <img
         src="/imgs/no_wish_list.png"
         class="w-[30%] object-contain"
         alt="no wish list data"
       />
     </div>
-    <div class="flex justify-center">
-      <img
-        src="/imgs/no_wish_list.png"
-        class="w-[30%] object-contain"
-        alt="no wish list data"
-      />
-    </div>
-
     }
-  </div>
-  }@else {
-
-  <div class="flex justify-center">
-    <img
-      src="/imgs/no_wish_list.png"
-      class="w-[30%] object-contain"
-      alt="no wish list data"
-    />
   </div>
   }
 </section>

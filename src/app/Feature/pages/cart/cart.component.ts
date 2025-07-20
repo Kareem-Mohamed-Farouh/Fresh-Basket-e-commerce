@@ -20,8 +20,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 })
 export class CartComponent {
   private readonly cartService = inject(CartService);
-
+  ProductQuantity: WritableSignal<number> = signal(0);
   cartData: WritableSignal<ICart> = signal({} as ICart);
+  cartitemnumber: WritableSignal<number> = signal(0);
   ngOnInit(): void {
     this.getcartItemInfo();
   }
@@ -32,6 +33,8 @@ export class CartComponent {
         console.log(res.data);
         this.cartData.set(res.data);
         this.cartService.numOfCartItem.set(res.numOfCartItems);
+        this.cartService.totalCartPric.set(res.data.totalCartPrice);
+        this.cartitemnumber.set(res.numOfCartItems);
       },
     });
   }
@@ -39,11 +42,30 @@ export class CartComponent {
     this.cartService.RemoveSpecificCartItem(productid).subscribe({
       next: (res) => {
         console.log('TextTrack', res.data);
-        // this.cartData.set(res.data);
+        this.cartData.set(res.data);
         this.getcartItemInfo();
         this.cartService.numOfCartItem.set(res.numOfCartItems);
+        // this.cartService.totalCartPric.set(res.totalCartPrice);
+        this.cartitemnumber.set(res.numOfCartItems);
       },
     });
+  }
+
+  updateCartQuantity(newcCount: number, idProduct: string) {
+    // console.log(idProduct);
+    // console.log(newcCount);
+    this.ProductQuantity.set(newcCount);
+    this.cartService
+      .updateCartProductQuantity(this.ProductQuantity(), idProduct)
+      .subscribe({
+        next: (res) => {
+          // console.log(res);
+          if (res.status == 'success') {
+            this.getcartItemInfo();
+            this.ProductQuantity.set(res.numOfCartItems);
+          }
+        },
+      });
   }
 
   clearrCart() {
@@ -51,29 +73,8 @@ export class CartComponent {
       next: (res) => {
         console.log(res);
         this.getcartItemInfo();
+        this.cartitemnumber.set(res.numOfCartItems);
       },
     });
-  }
-
-  ProductQuantity: WritableSignal<number> = signal(0);
-  // ProductQuantity: number = 0;
-
-  updateCartQuantity(newcCount: number, idProduct: string) {
-    console.log(idProduct);
-    console.log(newcCount);
-    this.ProductQuantity.set(newcCount);
-
-    this.cartService
-
-      .updateCartProductQuantity(this.ProductQuantity(), idProduct)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          if (res.status == 'success') {
-          }
-          this.getcartItemInfo();
-          this.ProductQuantity.set(res.numOfCartItems);
-        },
-      });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FlowbiteService } from './core/services/flowbite/flowbite.service';
 import { initFlowbite } from 'flowbite';
@@ -20,5 +20,18 @@ export class AppComponent {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
     });
+  }
+
+  toTop() {
+    scrollTo(0, 0);
+  }
+  hide: boolean = false;
+  @HostListener('window:scroll') totop() {
+    let sscrollTop = document.documentElement.scrollTop;
+    if (sscrollTop > 500) {
+      this.hide = false;
+    } else {
+      this.hide = true;
+    }
   }
 }

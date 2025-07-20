@@ -14,7 +14,7 @@
     >
       <ul class="flex max-sm:space-x-2 md:space-x-4">
         <li>
-          <a routerLink="/aboutus" class="block rounded-sm">About Us</a>
+          <a routerLink="/about" class="block rounded-sm">About Us</a>
         </li>
         <li class="cursor-pointer">
           <a class="block rounded-sm">Compare</a>
@@ -104,7 +104,7 @@
       <!-- Dropdown الخاص باللغة -->
       <div
         id="dropdownLanguage"
-        class="hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+        class="hidden z-[99999] bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
       >
         <ul class="py-2 text-sm text-gray-700">
           <li>
@@ -131,7 +131,7 @@
       <!-- Dropdown الخاص بالعملة -->
       <div
         id="dropdownCurrency"
-        class="hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+        class="hidden z-[99999] bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
       >
         <ul class="py-2 text-sm text-gray-700">
           <li>
@@ -275,16 +275,16 @@
         class="hidden absolute top-[100%] start-[20px] font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:divide-gray-600"
       >
         <ul
-          class="py-2 text-sm text-[#000]"
+          class="py-2 text-sm text-[#000] transition-all duration-300"
           aria-labelledby="dropdownLargeButton"
         >
-          <li>
+          <li class="hover:bg-green-200">
             <a class="block px-4 py-2">Dashboard</a>
           </li>
-          <li>
+          <li class="hover:bg-green-200">
             <a class="block px-4 py-2">Settings</a>
           </li>
-          <li>
+          <li class="hover:bg-green-200">
             <a class="block px-4 py-2">Earnings</a>
           </li>
         </ul>
@@ -344,7 +344,7 @@
             Meats & Seafood</a
           >
         </li> -->
-        <li>
+        <!-- <li>
           <a
             routerLink="/chackout"
             routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
@@ -352,7 +352,7 @@
             ><img class="h-4 w-4" src="/images/bekary.png" alt="meaticon" />
             Bakery</a
           >
-        </li>
+        </li> -->
         <li>
           <a
             routerLink="/allOrder"
@@ -361,7 +361,7 @@
             ><i class="fas fa-truck text-xs"></i> All order</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a
             routerLink="/aboutus"
             routerLinkActive="text-[#35AFA0]      rounded bg-[#F0FAFF]"
@@ -369,7 +369,7 @@
             ><img class="h-4 w-4" src="/images/cup.png " alt="meaticon" />
             Beverages</a
           >
-        </li>
+        </li> -->
         <li>
           <a
             routerLink="/blog"

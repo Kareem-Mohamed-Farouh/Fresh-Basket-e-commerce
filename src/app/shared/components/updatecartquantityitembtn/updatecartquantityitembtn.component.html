@@ -3,15 +3,17 @@
 >
   <button
     (click)="
-      updateCartQuantity(countProduct <= 0 ? countProduct : countProduct - 1)
+      updateCartQuantity(
+        countProduct() <= 0 ? countProduct() : countProduct() - 1
+      )
     "
     class="w-[30%] py-1 px-4 bg-gray-100 hover:text-yellow-400 hover:bg-gray-200 transition-all duration-400"
   >
     -
   </button>
-  <span class="block text-center py-1 px-4 w-[40%]">{{ countProduct }}</span>
+  <span class="block text-center py-1 px-4 w-[40%]">{{ countProduct() }}</span>
   <button
-    (click)="updateCartQuantity(countProduct + 1)"
+    (click)="updateCartQuantity(countProduct() + 1)"
     class="w-[30%] py-1 px-4 bg-[#ffcd00] hover:text-white hover:bg-yellow-400 transition-all duration-400"
   >
     +

@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { Routes, ActivatedRoute } from '@angular/router';
+import { islogedinGuard } from './core/guards/islogedin/islogedin.guard';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    canActivate: [islogedinGuard],
     path: 'login',
     loadComponent: () =>
       import('./Feature/pages/login/login.component').then(
@@ -15,6 +17,7 @@ export const routes: Routes = [
     title: 'login',
   },
   {
+    canActivate: [islogedinGuard],
     path: 'register',
     loadComponent: () =>
       import('./Feature/pages/register/register.component').then(

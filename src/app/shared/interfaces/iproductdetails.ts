@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface IProductdetails {
   sold: number;
   images: string[];
   subcategory: Subcategory[];
@@ -9,12 +9,15 @@ export interface IProduct {
   description: string;
   quantity: number;
   price: number;
+  priceAfterDiscount: number;
   imageCover: string;
   category: Category;
   brand: Category;
   ratingsAverage: number;
   createdAt: string;
   updatedAt: string;
+  __v: number;
+  reviews: any[];
   id: string;
 }
 
@@ -25,7 +28,7 @@ export interface Category {
   image: string;
 }
 
-interface Subcategory {
+export interface Subcategory {
   _id: string;
   name: string;
   slug: string;

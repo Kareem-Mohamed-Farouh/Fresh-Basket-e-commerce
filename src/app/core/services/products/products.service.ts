@@ -18,7 +18,7 @@ export class ProductsService implements productabstractions {
   }
   getSpicificProduct(id: string): Observable<any> {
     return this.httpClient.get(
-      `${environment.baseUrl}${productndpoints.getSpecificProduct}id`
+      `${environment.baseUrl}${productndpoints.getSpecificProduct}${id}`
     );
   }
 }
