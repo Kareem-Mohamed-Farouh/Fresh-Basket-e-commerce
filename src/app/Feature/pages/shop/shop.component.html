@@ -2,24 +2,18 @@
   <div class="grid grid-cols-5 gap-2">
     <div class="max-md:col-span-4 md:col-span-1 relative">
       <aside
-        [class.max-md:translate-x-[-100%]]="translate()"
-        class="transition-all duration-300 space-y-4 p-5 grid grid-cols-1 max-md:fixed z-[200] start-0 top-0 max-md:bg-white gap-4 uppercase text-sm justify-between"
+        [class.max-md:translate-x-[92%]]="translate()"
+        class="transition-all duration-300 space-y-4 ps-8 overflow-y-auto grid grid-cols-1 max-md:fixed z-[500] end-0 top-0 bottom-0 md:bg-white gap-4 uppercase text-sm justify-between"
       >
-        <div class="space-y-4 relative">
-          <button
-            (click)="toggel()"
-            class="cursor-pointer md:hidden size-[3.125rem] bg-green-700 absolute rounded-full end-[-3rem] top-[30%]"
-          >
-            @if(translate()){
-
-            <i class="text-xl text-white font-bold ms-3 fa fa-angle-right"></i>
-            }@else {
-            <i class="text-xl text-white font-bold ms-3 fa fa-angle-left"></i>
-
-            }
-          </button>
-
-          <div class="">
+        <button
+          (click)="toggel()"
+          [class.-rotate-180]="translate()"
+          class="cursor-pointer md:hidden size-[2.5rem] bg-green-700 absolute rounded-full start-[0rem] top-[40%]"
+        >
+          <i class="text-xl text-white font-bold fa fa-angle-right"></i>
+        </button>
+        <div class="space-y-4 bg-white">
+          <div class="p-4">
             <h2 class="font-semibold mb-2">Product Categories</h2>
             @for (category of categories; track $index) {
             <label class="flex items-center space-x-2">
@@ -31,7 +25,7 @@
           <!-- Categories -->
 
           <!-- Brands -->
-          <div>
+          <div class="p-4">
             <h2 class="font-semibold mb-2">Brands</h2>
             @for (brand of brands; track $index) {
             <label class="flex items-center space-x-2">
@@ -41,7 +35,7 @@
             }
           </div>
 
-          <div>
+          <div class="p-4">
             <img
               src="/images/sidebar-banner.gif.png"
               class="rounded"

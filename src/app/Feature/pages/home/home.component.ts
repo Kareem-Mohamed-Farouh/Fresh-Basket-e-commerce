@@ -7,6 +7,7 @@ import {
   inject,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -23,6 +24,7 @@ import { IWishlist } from '../../../shared/interfaces/Iwishlist';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -46,13 +48,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly categoryService = inject(CategoryService);
   private readonly wishlistService = inject(WishlistService);
   private readonly authService = inject(AuthService);
+  private readonly pLATFORM_ID = inject(PLATFORM_ID);
   subescribtios: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.getAllProductData();
     this.getALLCategoryData();
-    if (localStorage.getItem('basketToken')) {
-      this.getwishlistData();
+    if (isPlatformBrowser(this.pLATFORM_ID)) {
+      if (localStorage.getItem('basketToken')) {
+        this.getwishlistData();
+      }
     }
   }
 

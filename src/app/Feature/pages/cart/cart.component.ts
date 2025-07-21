@@ -9,20 +9,15 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-cart',
-  imports: [
-    CurrencyPipe,
-    UpdatecartquantityitembtnComponent,
-    RouterLink,
-    SweetAlert2Module,
-  ],
+  imports: [CurrencyPipe, RouterLink, SweetAlert2Module],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  private readonly cartService = inject(CartService);
   ProductQuantity: WritableSignal<number> = signal(0);
-  cartData: WritableSignal<ICart> = signal({} as ICart);
   cartitemnumber: WritableSignal<number> = signal(0);
+  cartData: WritableSignal<ICart> = signal({} as ICart);
+  private readonly cartService = inject(CartService);
   ngOnInit(): void {
     this.getcartItemInfo();
   }

@@ -3,10 +3,9 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
 
 export const setHeaderInterceptor: HttpInterceptorFn = (req, next) => {
-  if (localStorage.getItem('basketToken') !== undefined) {
-    let platform = inject(PLATFORM_ID);
-
-    if (isPlatformBrowser(platform)) {
+  let platform = inject(PLATFORM_ID);
+  if (isPlatformBrowser(platform)) {
+    if (localStorage.getItem('basketToken') !== undefined) {
       if (localStorage.getItem('basketToken')) {
         let userHeader: any = { token: localStorage.getItem('basketToken') };
 

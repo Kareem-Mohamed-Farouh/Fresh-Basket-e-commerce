@@ -67,7 +67,7 @@ export class ShopComponent {
     });
   }
   addProductToWishList(productid: string) {
-    if (localStorage.getItem('basketToken')) {
+    if (typeof window !== 'undefined' && localStorage.getItem('basketToken')) {
       this.subescribtios = this.wishlistService
         .addProductToWishlist(productid)
         .subscribe({

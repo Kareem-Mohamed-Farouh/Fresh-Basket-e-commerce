@@ -40,16 +40,16 @@ export class LoginComponent {
             this.userToken.set(res.token);
             this.Token.set(this.userToken());
             localStorage.setItem('basketToken', res.token);
-            this.decode();
+            // this.decode();
             this.router.navigate(['/home']);
           }
         },
       });
     }
   }
-  cc!: any;
-  decode() {
-    this.cc = jwtDecode(localStorage.getItem('basketToken')!);
-    console.log(this.cc);
-  }
+  // cc!: any;
+  // decode() {
+  //   this.cc = jwtDecode(localStorage.getItem('basketToken')!);
+  //   console.log(this.cc);
+  // }
 }
