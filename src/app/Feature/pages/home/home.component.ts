@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subescribtios = this.wishlistService.getProductInWishlist().subscribe({
       next: (res) => {
         if (res.status == 'success') {
-          console.log('RES WISHLIST', res);
+          // console.log('RES WISHLIST', res);
           // this.res = res;
           this.wishlistData.set(res.data);
           this.wishlistService.Wishlistcount.set(res.count);
@@ -119,16 +119,37 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  customOptions2: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    navSpeed: 700,
+    dotsData: true,
+    navText: [
+      '<i class="fa-solid fa-angle-left"></i>',
+      '<i class=" fa-solid fa-angle-right"></i>',
+    ],
+    responsive: {
+      0: {
+        items: 1,
+      },
+    },
+    nav: false,
+  };
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
+    touchDrag: true,
+    pullDrag: true,
     dots: false,
     navSpeed: 700,
     navText: [
-      '<i class="fa-solid fa-angle-left"></i>',
-      '<i class="fa-solid fa-angle-right"></i>',
+      '<i class="fa-solid z-[500]  fa-angle-left"></i>',
+      '<i class="fa-solid z-[500] rounded-sm  fa-angle-right"></i>',
     ],
     responsive: {
       0: {
@@ -146,7 +167,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
     nav: true,
   };
-
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

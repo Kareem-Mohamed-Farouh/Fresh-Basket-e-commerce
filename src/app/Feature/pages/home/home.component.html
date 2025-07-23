@@ -30,6 +30,8 @@
           [src]="category.image"
           class="w-[4.6875rem] h-[4.6875rem] object-contain"
           [alt]="category.name"
+          width="4.6875rem"
+          height="75px"
         />
       </div>
       <div class="card-body flex flex-col items-start justify-between">
@@ -77,11 +79,25 @@
         class="card p-3 flex flex-col gap-[1.25rem] cursor-pointer"
       >
         <div class="card-img-top relative">
-          <img
+          <!-- <img
             [src]="product.imageCover"
             class="w-full h-auto object-cover"
             [alt]="product.title"
-          />
+          /> -->
+
+          <owl-carousel-o [options]="customOptions">
+            @for (img of product.images; track $index) {
+
+            <ng-template carouselSlide>
+              <img
+                [src]="img"
+                class="w-full min-h-[21.875rem] image-card object-cover"
+                [alt]="product.title"
+              />
+            </ng-template>
+            }
+          </owl-carousel-o>
+
           <span
             class="absolute top-0 left-0 bg-red-600 text-white text-lg font-bold p-6 rounded-full"
           >
@@ -148,11 +164,25 @@
           >
             <img src="/imgs/eye.gif" class="size-10 mx-auto" alt="view" />
           </div>
-          <img
+          <!-- <img
             [src]="product.imageCover"
             class="w-full h-auto object-cover"
             [alt]="product.title"
-          />
+          /> -->
+
+          <owl-carousel-o [options]="customOptions">
+            @for (img of product.images; track $index) {
+
+            <ng-template carouselSlide>
+              <img
+                [src]="img"
+                class="w-full h-auto image-card object-cover"
+                [alt]="product.title"
+              />
+            </ng-template>
+            }
+          </owl-carousel-o>
+
           <span
             class="absolute top-0 left-0 bg-[#35AFA0] text-white text-xs font-bold px-3 py-1 rounded"
           >

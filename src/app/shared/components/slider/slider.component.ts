@@ -9,6 +9,7 @@ import { IProduct } from '../../interfaces/iproduct';
 import { ProductsService } from '../../../core/services/products/products.service';
 import { OwlOptions, CarouselModule } from 'ngx-owl-carousel-o';
 import { AddbtnComponent } from '../addbtn/addbtn.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-slider',
@@ -18,6 +19,7 @@ import { AddbtnComponent } from '../addbtn/addbtn.component';
 })
 export class SliderComponent implements OnInit {
   products: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
+  subescribtios: Subscription = new Subscription();
   private readonly productsService = inject(ProductsService);
 
   ngOnInit(): void {
@@ -25,7 +27,7 @@ export class SliderComponent implements OnInit {
   }
 
   getAllProductData() {
-    this.productsService.getAllProducts().subscribe({
+    this.subescribtios = this.productsService.getAllProducts().subscribe({
       next: (res) => {
         // console.log(res.data);
         this.products.set(res.data);
@@ -40,6 +42,7 @@ export class SliderComponent implements OnInit {
     pullDrag: true,
     autoplay: true,
     autoplayTimeout: 2000,
+    autoHeight: false,
     autoplaySpeed: 700,
     dots: false,
     smartSpeed: 500,
@@ -64,4 +67,10 @@ export class SliderComponent implements OnInit {
     },
     nav: true,
   };
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subescribtios.unsubscribe();
+  }
 }

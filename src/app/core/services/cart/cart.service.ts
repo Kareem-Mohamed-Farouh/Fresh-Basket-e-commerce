@@ -19,16 +19,18 @@ import { isPlatformBrowser } from '@angular/common';
 export class CartService {
   numOfCartItem: WritableSignal<number> = signal<number>(0);
   totalCartPric: WritableSignal<number> = signal<number>(0);
-  private readonly httpClient = inject(HttpClient);
-  private readonly platformId = inject(PLATFORM_ID);
+  // private readonly httpClient = inject(HttpClient);
+  private readonly pLATFORM_ID = inject(PLATFORM_ID);
 
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
+  constructor(private httpClient: HttpClient) {
+    if (isPlatformBrowser(this.pLATFORM_ID)) {
       this.getLogedUserCart().subscribe({
         next: (res) => {
-          // console.log('ress', res.numOfCartItems);
-          this.numOfCartItem.set(res.numOfCartItems);
-          this.totalCartPric.set(res.data.totalCartPrice);
+          if (res.status == 'success') {
+            // console.log('ress', res.numOfCartItems);
+            this.numOfCartItem.set(res.numOfCartItems);
+            this.totalCartPric.set(res.data.totalCartPrice);
+          }
         },
       });
     }

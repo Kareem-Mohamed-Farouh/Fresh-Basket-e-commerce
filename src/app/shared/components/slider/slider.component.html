@@ -1,4 +1,4 @@
-<div class="lg:px-[5rem] xl:px-[15rem] px-4">
+<div class="lg:px-[5rem] min-h-[21.875rem] xl:px-[15rem] px-4">
   <owl-carousel-o class="relative" [options]="customOptions">
     @for (product of products(); track product._id) {
     <ng-template carouselSlide>
@@ -13,7 +13,7 @@
           </div>
           <img
             [src]="product.imageCover"
-            class="w-full h-auto object-cover"
+            class="w-full object-cover"
             [alt]="product.title"
           />
           <span

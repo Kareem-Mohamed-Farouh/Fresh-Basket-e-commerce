@@ -1,60 +1,18 @@
-<div class="">
+<div class="w-full h-[21.875rem] overflow-hidden">
   <owl-carousel-o class="relative" [options]="customOptions">
+    @for (image of images; track $index) {
     <ng-template carouselSlide>
-      <img
-        src="/images/1.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
+      <div class="image-card">
+        <img
+          [src]="image"
+          class="object-cover w-full"
+          (load)="onImageLoad($event)"
+          decoding="async"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/2.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/3.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/4.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/cat.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/dawa.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
-    <ng-template carouselSlide>
-      <img
-        src="/images/mobile.avif"
-        class="object-contain"
-        loading="lazy"
-        alt="bacola"
-      />
-    </ng-template>
+    }
   </owl-carousel-o>
 </div>

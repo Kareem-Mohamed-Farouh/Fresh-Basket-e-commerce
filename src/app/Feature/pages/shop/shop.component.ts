@@ -1,4 +1,11 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { CategoryService } from '../../../core/services/category/category.service';
 import { ProductsService } from '../../../core/services/products/products.service';
 import { Icategory } from '../../../shared/interfaces/icategory';
@@ -22,16 +29,17 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
-export class ShopComponent {
-  products: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
-  searshWord: WritableSignal<string> = signal<string>('');
+export class ShopComponent implements OnInit, OnDestroy {
   // Products shown after filters/search/sorting applied
+  // Available categories and brands for filtering
   filteredProducts: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
   wishlistData: WritableSignal<IWishlist[]> = signal<IWishlist[]>([]);
-  // Available categories and brands for filtering
+  products: WritableSignal<IProduct[]> = signal<IProduct[]>([]);
+  translate: WritableSignal<boolean> = signal<boolean>(true);
+  searshWord: WritableSignal<string> = signal<string>('');
   categories: string[] = [];
   brands: string[] = [];
-  isLoggedIn = true;
+
   // Selected filters
   selectedBrands = new Set<string>();
   selectCategory = new Set<string>();
@@ -41,20 +49,22 @@ export class ShopComponent {
   private readonly productsService = inject(ProductsService);
   private readonly toastrService = inject(ToastrService);
   subescribtios: Subscription = new Subscription();
+
   ngOnInit(): void {
     this.getAllProductData();
     this.getwishlistData();
   }
 
-  // getcartItemInfo() {
-  //   this.cartService.getLogedUserCart().subscribe({
+  // getcartItemInfo() : void {
+  //   this.subescribtios =   this.cartService.getLogedUserCart().subscribe({
   //     next: (res) => {
   //       console.log(res.data.products);
   //       this.cartData.set(res.data.products);
   //     },
   //   });
   // }
-  getwishlistData() {
+
+  getwishlistData(): void {
     this.subescribtios = this.wishlistService.getProductInWishlist().subscribe({
       next: (res) => {
         if (res.status == 'success') {
@@ -66,7 +76,8 @@ export class ShopComponent {
       },
     });
   }
-  addProductToWishList(productid: string) {
+
+  addProductToWishList(productid: string): void {
     if (typeof window !== 'undefined' && localStorage.getItem('basketToken')) {
       this.subescribtios = this.wishlistService
         .addProductToWishlist(productid)
@@ -82,7 +93,7 @@ export class ShopComponent {
     }
   }
 
-  removProductFromWishlist(productid: string) {
+  removProductFromWishlist(productid: string): void {
     this.subescribtios = this.wishlistService
       .removeProductFromWishlist(productid)
       .subscribe({
@@ -94,8 +105,8 @@ export class ShopComponent {
       });
   }
 
-  getAllProductData() {
-    this.productsService.getAllProducts().subscribe({
+  getAllProductData(): void {
+    this.subescribtios = this.productsService.getAllProducts().subscribe({
       next: (res) => {
         this.products.set(res.data);
         this.filteredProducts.set(
@@ -110,8 +121,12 @@ export class ShopComponent {
       },
     });
   }
-  translate: WritableSignal<boolean> = signal<boolean>(true);
-  toggel() {
+
+  toggel(): void {
     this.translate.update((t) => !t);
+  }
+
+  ngOnDestroy(): void {
+    this.subescribtios.unsubscribe();
   }
 }

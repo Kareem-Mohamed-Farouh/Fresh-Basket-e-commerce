@@ -9,8 +9,11 @@
   --color-main-color: #35afa0;
 }
 
+// .main-color {
+//   color: var(--color-main-color);
+// }
 .main-color {
-  color: var(--color-main-color);
+  background-color: var(--color-main-color);
 }
 
 body,
