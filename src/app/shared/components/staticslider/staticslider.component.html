@@ -1,4 +1,4 @@
-<div class="w-full h-[21.875rem] overflow-hidden">
+<div class="w-full max-h-[21.875rem] overflow-hidden">
   <owl-carousel-o class="relative" [options]="customOptions">
     @for (image of images; track $index) {
     <ng-template carouselSlide>
@@ -6,9 +6,7 @@
         <img
           [src]="image"
           class="object-cover w-full"
-          (load)="onImageLoad($event)"
           decoding="async"
-          loading="eager"
           fetchpriority="high"
         />
       </div>

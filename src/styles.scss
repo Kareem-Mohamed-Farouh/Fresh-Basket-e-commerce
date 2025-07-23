@@ -26,8 +26,8 @@ body,
   color: black;
   border: 1px solid #edeef5;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,18 @@ body,
   right: 0rem;
   transform: translate(0%, -50%);
 }
-
+@media screen and (max-width: 768px) {
+  .owl-nav .owl-prev {
+    left: 1rem;
+  }
+  .owl-nav .owl-next {
+    right: 1rem;
+  }
+  .owl-theme .owl-nav [class*="owl-"] {
+    width: 30px;
+    height: 30px;
+  }
+}
 // toastr
 
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */

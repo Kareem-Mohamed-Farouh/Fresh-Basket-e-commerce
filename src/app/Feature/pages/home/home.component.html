@@ -113,9 +113,7 @@
               >$ {{ product.price }}
             </span>
           </div>
-          <p class="card-text font-semibold text-sm line-clamp-2">
-            {{ product.description }}
-          </p>
+
           <span class="text-[#00b853] font-semibold uppercase text-xs">{{
             product.quantity + " In stock"
           }}</span>
@@ -190,9 +188,10 @@
           </span>
         </div>
         <div class="card-body">
-          <p class="card-text font-semibold text-sm line-clamp-2">
-            {{ product.description }}
+          <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
+            {{ product.title }}
           </p>
+
           <span class="text-[#00b853] font-semibold uppercase text-xs">{{
             product.quantity + " In stock"
           }}</span>
@@ -372,9 +371,6 @@
         >
           <p class="card-text font-semibold text-sm mb-1 text-[#35AFA0]">
             {{ product.title.split(" ", 3).join(" ") }}
-          </p>
-          <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
-            {{ product.description }}
           </p>
 
           <span class="text-[#00b853] font-semibold uppercase text-xs">{{
