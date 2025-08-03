@@ -117,55 +117,31 @@
       </div>
     </div>
   </div>
-  <h3
-    class="uppercase ms-4 text-2xl w-fit rounded-md mt-3 p-2 font-medium text-[#35AFA0] hover:translate-x-2 hover:translate-y-2 duration-300 border-[#35AFA0] border-b-white border-2 block border-t-2"
-  >
-    recommend related Product
-  </h3>
+
   <div
-    class="max-sm:p-4 p-10 grid p-2 max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
+    class="bg-gray-100 rounded-lg px-4 my-4 py-4 flex items-center justify-between"
+  >
+    <div class="">
+      <h3 class="uppercase text-lg font-bold text-[#35AFA0]">
+        recommend related Product
+      </h3>
+      <p>Do not miss the current offers until the end of March.</p>
+    </div>
+    <div
+      class="cursor-pointer max-sm:text-xs text-gray-400 group hover:text-gray-500 text-sm text-center my-4 px-4 py-2 border hover:border-gray-500 transition-all duration-300 rounded-full"
+    >
+      View All
+      <i
+        class="transition-all duration-300 text-gray-400 group-hover:text-gray-500 ms-2 fa-solid fa-arrow-right"
+      ></i>
+    </div>
+  </div>
+  <div
+    class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-3"
   >
     @for (prod of products(); track prod._id) { @if(prod.brand._id ===
     ProductData().brand._id){
-    <div
-      [routerLink]="['/productdetails', prod._id]"
-      class="card hover:rotate-2 hover:border-r-white transition-all duration-300 border-2 overflow-hidden border-[#35AFA0] rounded-md"
-    >
-      <div class="card-image text-center">
-        <img
-          [src]="prod.imageCover"
-          class="h-[150px] w-full object-contain"
-          alt=""
-        />
-      </div>
-      <div class="cursor-pointer">
-        <div class="card-body px-2">
-          <h4 class="text-[#35AFA0] py-1 text-center text-sm">
-            {{ prod.category.name }}
-          </h4>
-          <h3 class="card-title font-medium mb-1">
-            {{ prod.title.split(" ", 2).join(" ") }}
-          </h3>
-          <p class="card-text">Brand: {{ prod.brand.name }}</p>
-        </div>
-      </div>
-      <div class="flex justify-between mx-2 items-center">
-        <span class="font-bold text-red-700">
-          Price : {{ prod.price }} EGP
-        </span>
-      </div>
-      <div class="flex items-center justify-between mx-3 mb-3 relative">
-        <div>
-          @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index)
-          {
-          <i class="fa-solid fa-star text-yellow-400"></i>
-          } @if (prod.ratingsAverage % 1 !== 0) {
-          <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
-          }
-          <span class="ms-1 text-gray-500"> ({{ prod.ratingsAverage }} )</span>
-        </div>
-      </div>
-    </div>
+    <app-card [products]="prod"></app-card>
     } }
   </div>
   }

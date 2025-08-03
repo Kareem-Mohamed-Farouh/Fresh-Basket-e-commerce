@@ -25,6 +25,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { CardComponent } from '../../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-home',
@@ -33,8 +34,8 @@ import { isPlatformBrowser } from '@angular/common';
     SliderComponent,
     AddbtnComponent,
     RouterLink,
-
     StaticsliderComponent,
+    CardComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -124,15 +125,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    autoplay: true,
-    autoplaySpeed: 1000,
+
     dots: true,
     navSpeed: 700,
     dotsData: true,
-    navText: [
-      '<i class="fa-solid fa-angle-left"></i>',
-      '<i class=" fa-solid fa-angle-right"></i>',
-    ],
+    navText: ['', ''],
     responsive: {
       0: {
         items: 1,

@@ -1,6 +1,6 @@
 <section class="home">
   <app-staticslider></app-staticslider>
-  <div class="lg:px-[5rem] xl:px-[15rem] px-4">
+  <div class="md:px-[4rem] lg:px-[10rem] xl:px-[13rem] px-4">
     <div class="my-8 grid md:grid-cols-5 max-sm:grid-cols-2 sm:grid-cols-2">
       @for (category of categories().slice(1); track $index) { @if ($index ===
       0) {
@@ -74,10 +74,7 @@
           Remains until the end of the offer
         </p>
         @for (product of products().slice(39, 40); track $index) {
-        <div
-          [routerLink]="['/productdetails', product.id]"
-          class="card p-3 flex flex-col gap-[1.25rem] cursor-pointer"
-        >
+        <div class="card p-3 flex flex-col gap-[1.25rem] cursor-pointer">
           <div class="card-img-top relative">
             <!-- <img
             [src]="product.imageCover"
@@ -105,6 +102,9 @@
             </span>
           </div>
           <div class="card-body">
+            <p class="card-text font-semibold text-sm p-0 line-clamp-2">
+              {{ product.title }}
+            </p>
             <div class="discount flex items-center gap-2 my-2">
               <span class="text-gray-400 text-sm font-semibold line-through"
                 >$ {{ product.price * 1.25 }}</span
@@ -117,7 +117,7 @@
             <span class="text-[#00b853] font-semibold uppercase text-xs">{{
               product.quantity + " In stock"
             }}</span>
-            <div class="star-review flex items-center my-2">
+            <div class="star-review flex items-center my-1">
               @for (star of [1,2,3,4,5]; track $index) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,6 +131,17 @@
               </svg>
               }
               <span class="text-sm text-gray-500 font-semibold">1 review</span>
+
+              <div
+                [routerLink]="['/productdetails', product.id]"
+                class="ms-auto layer flex flex-col items-center justify-center"
+              >
+                <span
+                  class="flex gap-1 items-center text-xs p-1 bg-white uppercase my-1 text-[#35AFA0] border-[#35AFA0] border rounded-md font-semibold rounded-md"
+                  >view DETAILS
+                  <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -154,101 +165,7 @@
         class="col-span-3 grid max-md:grid-cols-2 lg:grid-cols-3 md:grid-cols-2"
       >
         @for (product of products().slice(15, 21); track $index) {
-        <div
-          class="card p-3 flex flex-col gap-[1.25rem] shadow shadow-gray-300"
-        >
-          <div
-            [routerLink]="['/productdetails', product.id]"
-            class="card-img-top group relative cursor-pointer"
-          >
-            <div
-              class="absolute flex justify-end items-start top-0 end-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
-            >
-              <img src="/imgs/eye.gif" class="size-10 mx-auto" alt="view" />
-            </div>
-            <!-- <img
-            [src]="product.imageCover"
-            class="w-full h-auto object-cover"
-            [alt]="product.title"
-          /> -->
-
-            <owl-carousel-o [options]="customOptions">
-              @for (img of product.images; track $index) {
-
-              <ng-template carouselSlide>
-                <img
-                  [src]="img"
-                  class="w-full h-auto image-card object-cover"
-                  [alt]="product.title"
-                />
-              </ng-template>
-              }
-            </owl-carousel-o>
-
-            <span
-              class="absolute top-0 left-0 bg-[#35AFA0] text-white text-xs font-bold px-3 py-1 rounded"
-            >
-              15%
-            </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
-              {{ product.title }}
-            </p>
-
-            <span class="text-[#00b853] font-semibold uppercase text-xs">{{
-              product.quantity + " In stock"
-            }}</span>
-            <div class="star-review flex items-center my-2">
-              @for (star of [1,2,3,4,5].slice(product.ratingsAverage); track
-              $index) {
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                class="w-4 h-4 text-[#ffcd00]"
-              >
-                <path
-                  d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
-                />
-              </svg>
-              }
-              <span class="text-xs ms-2 text-gray-500 font-semibold"
-                >{{ product.ratingsQuantity }} review</span
-              >
-            </div>
-            <div class="discount text-xs flex items-center gap-2 my-2 relative">
-              <span class="text-gray-400 font-semibold line-through"
-                >$ {{ product.price * 1.25 }}</span
-              >
-              <span class="text-red-600 text-lg font-semibold"
-                >$ {{ product.price }}
-              </span>
-
-              <div class="flex items-center justify-between">
-                <i
-                  (click)="addProductToWishList(product._id)"
-                  class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-                ></i>
-                @if(wishlistData() !== null){ @for (data of wishlistData();
-                track $index) { @if( data._id == product._id ){
-
-                <i
-                  (click)="removProductFromWishlist(product.id)"
-                  class="absolute bottom-2 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
-                ></i>
-                } @if(data._id !== product._id){
-                <i
-                  (click)="addProductToWishList(product._id)"
-                  class="absolute bottom-2 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-                ></i>
-                } } }
-              </div>
-            </div>
-            <app-addbtn [productid]="product._id"></app-addbtn>
-          </div>
-        </div>
-
+        <app-card [products]="product"></app-card>
         }
       </div>
     </div>
@@ -308,7 +225,7 @@
     </div>
 
     <div
-      class="lg:px-[5rem] xl:px-[15rem] bg-white px-4 my-8 flex items-center justify-between"
+      class="bg-gray-100 rounded-lg px-4 my-4 py-4 flex items-center justify-between"
     >
       <div class="">
         <h3 class="uppercase text-lg font-bold">Best Sellers</h3>
@@ -326,7 +243,7 @@
   </div>
   <!-- slider -->
   <app-slider> </app-slider>
-  <div class="lg:px-[5rem] xl:px-[15rem] px-4">
+  <div class="md:px-[4rem] lg:px-[10rem] xl:px-[13rem] px-4">
     <div class="">
       <p
         class="uppercase leading-[1.5rem] tracking-widest leading items-center text-center font-bold my-4 bg-[#FBEACF] rounded-lg py-[1.375rem]"
@@ -337,208 +254,24 @@
     </div>
     <!-- products -->
     <div
-      class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0"
+      #baner
+      class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
     >
       @for (product of products().slice(0,20); track $index) {
+      <!-- card 1 -->
 
-      <div
-        class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] shadow shadow-gray-300"
-      >
-        <div
-          [routerLink]="['/productdetails', product.id]"
-          class="card-img-top relative"
-        >
-          <div
-            class="layer absolute w-full flex flex-col items-center justify-center top-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
-          >
-            <span
-              class="flex gap-2 items-center text-xs bg-white uppercase p-2 text-[#35AFA0] border-[#35AFA0] border rounded-md my-2 font-semibold rounded-md"
-              >view DETAILS
-              <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
-            </span>
-          </div>
-          <img
-            [src]="product.imageCover"
-            class="w-full h-auto object-cover"
-            [alt]="product.title"
-          />
-          <span
-            class="absolute top-0 left-0 bg-[#35AFA0] z-[100] text-white text-xs font-bold px-3 py-1 rounded"
-          >
-            15%
-          </span>
-        </div>
-        <div class="card-body">
-          <div
-            class="cursor-pointer"
-            [routerLink]="['/productdetails', product.id]"
-          >
-            <p class="card-text font-semibold text-sm mb-1 text-[#35AFA0]">
-              {{ product.title.split(" ", 3).join(" ") }}
-            </p>
-
-            <span class="text-[#00b853] font-semibold uppercase text-xs">{{
-              product.quantity + " In stock"
-            }}</span>
-          </div>
-          <div class="star-review flex items-center my-2">
-            <div class="flex gap-1 items-center">
-              @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track
-              $index) {
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                class="w-4 h-4 text-[#ffcd00]"
-              >
-                <path
-                  d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
-                />
-              </svg>
-              } @if (product.ratingsAverage % 1 !== 0) {
-              <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
-              }
-            </div>
-            <span class="flex text-xs text-gray-500">
-              {{ product.ratingsQuantity }} review</span
-            >
-          </div>
-          <div class="discount flex items-center gap-2 my-2 relative">
-            <span class="text-gray-400 text-sm font-semibold line-through"
-              >$ {{ product.price * 1.25 }}</span
-            >
-            <span class="text-red-600 text-xl font-semibold"
-              >$ {{ product.price }}
-            </span>
-
-            <div class="flex items-center justify-between">
-              <i
-                (click)="addProductToWishList(product._id)"
-                class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-              ></i>
-              @if(wishlistData() !== null){ @for (data of wishlistData(); track
-              $index) { @if( data._id == product._id ){
-
-              <i
-                (click)="removProductFromWishlist(product._id)"
-                class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
-              ></i>
-              } @if(data._id !== product._id){
-              <i
-                (click)="addProductToWishList(product._id)"
-                class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-              ></i>
-              } } }
-            </div>
-          </div>
-          <app-addbtn [productid]="product._id"></app-addbtn>
-        </div>
-      </div>
-
+      <app-card [products]="product"></app-card>
       }
     </div>
     <!-- defer more products -->
 
     <div
-      class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0"
+      class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
     >
       @defer (on interaction(el) ) { @for (product of products().slice(20);
       track $index) {
-
-      <div
-        class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] shadow shadow-gray-300"
-      >
-        <div
-          [routerLink]="['/productdetails', product.id]"
-          class="card-img-top relative"
-        >
-          <div
-            class="layer absolute w-full flex flex-col items-center justify-center top-0 opacity-0 group-hover:opacity-100 duration-400 transition-all bottom-0 z-[100]"
-          >
-            <span
-              class="flex gap-2 items-center text-xs bg-white uppercase p-2 text-[#35AFA0] border-[#35AFA0] border rounded-md my-2 font-semibold rounded-md"
-              >view DETAILS
-              <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
-            </span>
-          </div>
-          <img
-            [src]="product.imageCover"
-            class="w-full h-auto object-cover"
-            [alt]="product.title"
-          />
-          <span
-            class="absolute top-0 left-0 bg-[#35AFA0] z-[100] text-white text-xs font-bold px-3 py-1 rounded"
-          >
-            15%
-          </span>
-        </div>
-        <div class="card-body">
-          <div
-            class="cursor-pointer"
-            [routerLink]="['/productdetails', product.id]"
-          >
-            <p class="card-text font-semibold text-sm h-[2.5rem] line-clamp-2">
-              {{ product.title }}
-            </p>
-
-            <span class="text-[#00b853] font-semibold uppercase text-xs">{{
-              product.quantity + " In stock"
-            }}</span>
-          </div>
-          <div class="star-review flex items-center my-2">
-            <div class="flex gap-1 items-center">
-              @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track
-              $index) {
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                class="w-4 h-4 text-[#ffcd00]"
-              >
-                <path
-                  d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
-                />
-              </svg>
-              } @if (product.ratingsAverage % 1 !== 0) {
-              <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
-              }
-            </div>
-            <span class="flex text-xs text-gray-500">
-              {{ product.ratingsQuantity }} review</span
-            >
-          </div>
-          <div class="discount flex items-center gap-2 my-2 relative">
-            <span class="text-gray-400 text-sm font-semibold line-through"
-              >$ {{ product.price * 1.25 }}</span
-            >
-            <span class="text-red-600 text-xl font-semibold"
-              >$ {{ product.price }}
-            </span>
-
-            <div class="flex items-center justify-between">
-              <i
-                (click)="addProductToWishList(product._id)"
-                class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-              ></i>
-              @if(wishlistData() !== null){ @for (data of wishlistData(); track
-              $index) { @if( data._id == product._id ){
-
-              <i
-                (click)="removProductFromWishlist(product._id)"
-                class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
-              ></i>
-              } @if(data._id !== product._id){
-              <i
-                (click)="addProductToWishList(product._id)"
-                class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
-              ></i>
-              } } }
-            </div>
-          </div>
-
-          <app-addbtn [productid]="product._id"></app-addbtn>
-        </div>
-      </div>
+      <!-- card 2 -->
+      <app-card [products]="product"></app-card>
 
       } }@placeholder {
 
@@ -551,6 +284,7 @@
       </button>
       }
     </div>
+    @defer (on hover(baner)) {
 
     <!-- advertisment -->
     <div
@@ -703,5 +437,6 @@
         </div>
       </div>
     </div>
+    }
   </div>
 </section>

@@ -1,0 +1,113 @@
+<div
+  class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] overflow-hidden shadow shadow-gray-300"
+>
+  <div class="card-img-top relative">
+    <owl-carousel-o class="relative" [options]="cardoption">
+      @for (image of products().images; track $index) {
+      <ng-template carouselSlide>
+        <img
+          [src]="image"
+          class="w-full group-hover:scale-110 transition-all duration-600 h-auto object-cover"
+          [alt]="products().title"
+          loading="lazy"
+        />
+      </ng-template>
+      }
+    </owl-carousel-o>
+    <span
+      class="absolute top-0 left-0 bg-[#35AFA0] z-[100] text-white text-xs font-bold px-3 py-1 rounded"
+    >
+      15%
+    </span>
+  </div>
+  <div class="card-body relative">
+    <div
+      class="cursor-pointer"
+      [routerLink]="['/productdetails', products().id]"
+    >
+      <p class="card-text font-semibold text-sm p-0 line-clamp-1">
+        {{ products().title }}
+      </p>
+      <div class="relative items-center flex justify-between my-1">
+        <span class="text-[#00b853] font-semibold uppercase text-xs">{{
+          products().quantity + " In stock"
+        }}</span>
+        <div
+          class="layer flex flex-col items-center justify-center end-0 top-0 opacity-0 translate-x-[200%] group-hover:translate-x-0 group-hover:opacity-100 duration-400 transition-all z-[100]"
+        >
+          <span
+            class="flex gap-1 items-center text-xs p-1 bg-white uppercase my-1 text-[#35AFA0] border-[#35AFA0] border rounded-md font-semibold rounded-md"
+            >view DETAILS
+            <img src="/imgs/eye.gif" class="size-6 mx-auto" alt="view" />
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="star-review flex items-center my-2">
+      <div class="flex gap-1 items-center">
+        @for (star of [1,2,3,4,5].slice(0, products().ratingsAverage); track
+        $index) {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          class="w-4 h-4 text-[#ffcd00]"
+        >
+          <path
+            d="M10 15.27l-5.18 2.73 1-5.82L1 7.24l6-.87L10 1l3 5.37 6 .87-4.82 4.94 1 5.82L10 15.27z"
+          />
+        </svg>
+        } @if (products().ratingsAverage % 1 !== 0) {
+        <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
+        }
+      </div>
+      <span class="flex text-xs text-gray-500">
+        {{ products().ratingsQuantity }} review</span
+      >
+    </div> -->
+    <div class="discount flex items-center gap-2 my-2 relative">
+      <span class="text-gray-400 text-sm font-semibold line-through"
+        >$ {{ products().price * 1.25 }}</span
+      >
+      <span class="text-red-600 text-xl font-semibold"
+        >$ {{ products().price }}
+      </span>
+
+      <div class="flex items-center justify-between">
+        @if(isInWishlist()) {
+        <i
+          (click)="removProductFromWishlist(products()._id)"
+          class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+        ></i>
+        } @else {
+        <i
+          (click)="addProductToWishList(products()._id)"
+          class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+        ></i>
+        }
+      </div>
+
+      <!-- <div class="flex items-center justify-between">
+        <i
+          (click)="addProductToWishList(products()._id)"
+          class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+        ></i>
+        @if(wishlistData() !== null){ @for (data of wishlistData(); track
+        $index) { @if( data._id == products()._id ){
+
+        <i
+          (click)="removProductFromWishlist(products()._id)"
+          class="absolute bottom-0 end-0 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+        ></i>
+        } @if(data._id !== products()._id){
+        <i
+          (click)="addProductToWishList(products()._id)"
+          class="absolute bottom-0 end-0 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+        ></i>
+        } } }
+      </div> -->
+    </div>
+
+    <app-addbtn [productid]="products()._id"></app-addbtn>
+  </div>
+</div>

@@ -13,10 +13,11 @@ import { CurrencyPipe } from '@angular/common';
 import { IProduct } from '../../../shared/interfaces/iproduct';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
+import { CardComponent } from '../../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-prodetails',
-  imports: [CurrencyPipe, CarouselModule, RouterLink],
+  imports: [CurrencyPipe, CarouselModule, RouterLink, CardComponent],
   templateUrl: './prodetails.component.html',
   styleUrl: './prodetails.component.scss',
 })

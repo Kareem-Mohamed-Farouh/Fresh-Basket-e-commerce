@@ -1,6 +1,6 @@
 @if(cartData()){
 
-<section class="my-4 px-4 md:px-[2rem] lg:px-[5rem] xl:px-[15rem]">
+<section class="my-4 px-4 md:px-[2rem] lg:px-[5rem] xl:px-[5rem]">
   <nav class="flex py-2 text-lg" aria-label="Breadcrumb">
     <ol
       class="capitalize inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
@@ -47,17 +47,23 @@
     </ol>
   </nav>
 
-  <div class="products-in-cart shadow pb-3 p-4 shadow-cyan-500 rounded-lg">
-    <h1 class="text-black capitalize text-4xl pt-3 font-extrabold text-center">
-      Shop <span class="capitalize text-[#35AFA0]"> Basket</span> Cart
-    </h1>
-
+  <div class="products-in-cart shadow pb-3 p-4 shadow-cyan-500 xl:px-[5rem]">
+    <div class="my-2">
+      <h1
+        class="text-black capitalize text-4xl pt-3 font-extrabold text-center"
+      >
+        Shop <span class="capitalize text-[#35AFA0]"> Basket</span> Cart
+      </h1>
+      <p class="text-center">Review your items and proceed to checkout</p>
+    </div>
     <div class="grid grid-cols-6 gap-5">
-      <div class="col-span-4 grid-cols-2 max-md:col-span-6 order-2 md:order-1">
+      <div
+        class="col-span-4 grid-cols-2 max-md:col-span-6 order-2 md:order-1 bg-white p-2 shadow rounded"
+      >
         @if ( cartData().totalCartPrice){ @for (prod of cartData().products;
         track $index) {
         <div
-          class="grid mb-1 border-b-[1px] max-sm:grid-cols-1 gap-2 md:grid-cols-[10%_minmax(0,1fr)]"
+          class="grid mb-1 border-b-[1px] border-gray-100 max-sm:grid-cols-1 gap-2 md:grid-cols-[10%_minmax(0,1fr)]"
         >
           <div>
             <img
@@ -120,7 +126,7 @@
                   showCancelButton: true
                 }"
                 (confirm)="removeProduct(prod.product._id)"
-                class="cursor-pointer block border mx-2 px-3 py-2 hover:bg-red-600 duration-500 bg-red-700 rounded-lg text-white"
+                class="cursor-pointer block border mx-2 px-3 py-2 bg-red-600 hover:bg-gradient-to-b hover:from-red-600 hover:to-red-800 transition-all duration-600 rounded-lg text-white"
               >
                 <i class="fas fa fa-trash-can"></i>
                 Remove
@@ -136,7 +142,7 @@
             showCancelButton: true
           }"
           (confirm)="clearrCart()"
-          class="cursor-pointer max-sm:w-[90%] sm:w-[40%] capitalize my-4 px-3 py-3 mx-auto block hover:text-white font-medium hover:bg-red-800 rounded-lg bg-red-600 text-gray-800 bg-opacity-95 border-b-2 duration-500"
+          class="cursor-pointer max-sm:w-[90%] sm:w-[40%] capitalize my-4 px-3 py-3 mx-auto block hover:text-white font-medium hover:bg-red-800 rounded-lg bg-red-600 text-gray-800 border-b-2 duration-500"
         >
           clear cart
         </button>
@@ -156,84 +162,80 @@
         </div>
         }
       </div>
-      <div class="col-span-2 max-md:col-span-6 order-1 md:order-2 my-4">
-        <div class="border border-black rounded-lg p-4 bg-[#F0FAFF] capitalize">
-          <div>
-            <h3 class="text-2xl my-2 font-bold">Invoice Total summary</h3>
-            <ul
-              class="text-lg text-center flex flex-col gap-2 font-medium p-3 border-[1px] rounded-t-lg border-gray-200"
-            >
-              <li class="flex justify-between items-center">
-                <span>items total price</span>
-                <span>
-                  {{
-                    cartData().totalCartPrice + cartData().totalCartPrice * 0.15
-                      | currency : "GBP"
-                  }}</span
-                >
-              </li>
-              <li class="flex justify-between items-center">
-                <span
-                  >discount
-                  <span class="text-xl font-bold text-red-700"
-                    >: 15%</span
-                  ></span
-                >
-                <span>
-                  {{
-                    cartData().totalCartPrice * 0.15 | currency : "GBP"
-                  }}</span
-                >
-              </li>
-            </ul>
-            <h3
-              class="text-lg text-center font-semibold text-red-700 rounded-b py-2 border-t-0 border-[1px] border-gray-200"
-            >
-              <span class="text-gray-900 font-semibold text-xl"
-                >Total Card Price :</span
-              >{{ cartData().totalCartPrice | currency : "GBP" }}
-            </h3>
-          </div>
-          <button
-            [disabled]="!cartitemnumber()"
-            [routerLink]="['/checkout', cartData()._id]"
-            class="text-xl flex capitalize py-2 flex disabled:bg-gray-500 justify-center text-white items-center rounded-lg my-2 w-full w-[30%] font-medium font-mediem hover:bg-green-600 bg-green-700 duration-500"
-          >
-            go to CheckOut
-          </button>
-          <p class="text-gray-500 text-sm">
-            by placing your order you agree to the baskets
-            <span class="text-[#35AFA0] cursor-pointer">
-              terms of services</span
-            >
-            and
-            <span class="text-[#35AFA0] cursor-pointer"> privacy policy.</span>
-          </p>
 
-          <form>
-            <label
-              for="code"
-              class="capitalize text-lg text-gray-900 font-bold my-4"
-            >
-              Add promo code or gift card
-            </label>
-            <input
-              type="number"
-              name="code"
-              placeholder="promo or gift card..."
-              id="code"
-              class="w-full border mt-3 border border-gray-300 bg-gray-200 p-2 rounded-lg"
-            />
-            <button
-              type="button"
-              class="w-full border my-3 hover:bg-[#35AFA0] transition-all duration-400 border-[#35AFA0] p-2 rounded-lg"
-            >
-              Redeem
-            </button>
-            <p class="text-gray-600 font-medium text-sm">
-              terms &conditions apply
-            </p>
-          </form>
+      <div class="col-span-2 max-md:col-span-6 order-1 md:order-2 my-4">
+        <div class="">
+          <div
+            class="bg-white rounded-2xl shadow-lg border border-gray-100 sticky top-8"
+          >
+            <div class="p-4 sm:p-6 border-b border-gray-100">
+              <h3
+                class="text-lg sm:text-xl font-semibold text-gray-900 flex items-center gap-2"
+              >
+                <i class="fas fa-receipt text-green-600"></i> Order Summary
+              </h3>
+            </div>
+            <div class="p-4 sm:p-6 space-y-4">
+              <div class="space-y-3">
+                <div class="flex justify-between text-sm">
+                  <!-- <span>Subtotal ({{ cartProducts().length }} items)</span> -->
+                  <span class="font-semibold">{{
+                    cartData().totalCartPrice | currency : "USD"
+                  }}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span>Shipping</span>
+                  <span class="text-green-600 font-semibold">FREE</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span>Tax</span>
+                  <span class="font-semibold">{{
+                    cartData().totalCartPrice * 0.08 | currency : "USD"
+                  }}</span>
+                </div>
+                <div class="border-t border-gray-200 pt-3">
+                  <div
+                    class="flex justify-between items-center text-base font-semibold"
+                  >
+                    <span>Total</span>
+                    <span class="text-green-600">{{
+                      cartData().totalCartPrice * 1.08 | currency : "USD"
+                    }}</span>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">Including tax</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Promo code"
+                  class="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                />
+                <button class="px-4 py-2 bg-gray-100 rounded-lg">Apply</button>
+              </div>
+              <button
+                [disabled]="!cartitemnumber()"
+                [routerLink]="['/checkout', cartData()._id]"
+                class="w-full bg-gradient-to-r from-green-600 to-green-300 text-white py-3 rounded-xl shadow-lg"
+              >
+                @if(!cartitemnumber()){
+
+                <a class="cursor-pointer">
+                  <i class="fas fa-lock mr-2"></i>Proceed to Checkout
+                </a>
+                }@else {
+
+                <a class="cursor-pointer">
+                  <i class="fas fa-unlock mr-2"></i>Proceed to Checkout
+                </a>
+                }
+              </button>
+              <div class="text-center text-xs text-gray-500">
+                <i class="fas fa-shield-alt mr-1"></i> Secure checkout powered
+                by SSL encryption
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
