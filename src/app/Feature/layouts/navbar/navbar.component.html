@@ -159,15 +159,18 @@
 </div>
 
 <div
-  class="bg-white text-sm flex max-sm:gap-1 sm:gap-3 font-semibold items-center max-sm:mx-[1rem] sm:px-[5rem] xl:px-[15rem]"
+  class="bg-white text-sm flex max-sm:gap-1 sm:gap-3 font-semibold items-center justify-between max-sm:mx-[1rem] sm:px-[5rem] xl:px-[15rem]"
 >
   <div class="logo max-md:opacity-0 max-md:invisible max-md:w-0">
-    <a routerLink="/home" class="">
-      <img src="/images/Link - Bacola Store.png" alt="" />
-    </a>
+    <img
+      routerLink="/home"
+      src="/images/Link - Bacola Store.png"
+      class=""
+      alt=""
+    />
   </div>
 
-  <form class="w-full max-w-[763.2px]">
+  <form class="w-full">
     <label for="default-search" class="mb-2 text-sm font-medium sr-only"
       >Search</label
     >
@@ -210,6 +213,12 @@
         >
           <img class="w-5 h-5" src="/images/user.png" alt="" />
         </div>
+        <div
+          routerLink="/login"
+          class="w-8 bg-sky-100 flex justify-center items-center rounded-full h-8 icon cursor-pointer"
+        >
+          <i class="fa-solid fa-sign-out"></i>
+        </div>
 
         <span class="text-red-600">
           {{ cartService.totalCartPric() | currency : "USD" }}</span
@@ -234,9 +243,9 @@
 </div>
 
 <nav
-  class="sticky top-0 bg-white z-[300] sm:px-4 py-1 max-sm:mx-[1rem] sm:px-[2rem] md:px-[5rem] xl:px-[15rem]"
+  class="sticky top-0 bg-white z-[5500] py-1 sm:px-[1rem] md:px-[3rem] xl:px-[13rem]"
 >
-  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+  <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-1">
     <div class="logo lg:hidden">
       <a routerLink="/home" class="">
         <img

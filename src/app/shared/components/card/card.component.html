@@ -1,6 +1,8 @@
 <div
   class="card cursor-pointer p-3 flex group flex-col gap-[1.25rem] overflow-hidden shadow shadow-gray-300"
 >
+  @if(products().images.length>0) {
+
   <div class="card-img-top relative">
     <owl-carousel-o class="relative" [options]="cardoption">
       @for (image of products().images; track $index) {
@@ -20,6 +22,7 @@
       15%
     </span>
   </div>
+  }
   <div class="card-body relative">
     <div
       class="cursor-pointer"
