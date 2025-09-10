@@ -56,9 +56,8 @@ export class ProdetailsComponent {
 
   getSpcificProductID(): void {
     this.activatedRoute.paramMap.subscribe(
-      (res) =>
-        // this.idprod.set(res.get('id')!) //true
-        this.idprod.set(res.get('id') ?? '') //true,
+      (res) => this.idprod.set(res.get('id')!) //true
+      // this.idprod.set(res.get('id') ?? '') //true,
     );
   }
   getproductdata(id: string): void {

@@ -1,6 +1,6 @@
 <div class="px-4 sm:px-[1rem] md:px-[5rem] xl:px-[13rem]">
   @if( ProductData()&& ProductData().category){
-  <div class="p-5 bg-gray-100 mt-2 rounded-lg">
+  <div class="p-5 bg-gray-50 mt-2 rounded-lg shadow-sm">
     <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
       <div
         class="grid items-start grid-cols-1 lg:grid-cols-3 gap-8 max-lg:gap-12 max-sm:gap-8"
@@ -58,7 +58,7 @@
                   ><i class="fa-solid fa-star-half text-yellow-500"></i
                 ></span>
                 }
-                <p class="text-sm text-gray-800">
+                <p class="text-sm text-yellow-600">
                   {{ ProductData().ratingsAverage }} ({{
                     ProductData().ratingsQuantity
                   }})
@@ -66,14 +66,17 @@
               </div>
             </div>
 
-            <h4 class="text-gray-800 text-2xl font-bold">
+            <h4 class="text-[#35AFA0] text-2xl font-bold">
               {{ ProductData().price | currency }}
             </h4>
 
             <div class="flex items-center justify-between">
-              <h4 class="text-lg font-bold ms-2 text-gray-600">
-                Brand : {{ ProductData().brand.name }}
-              </h4>
+              <p class="text-lg font-bold ms-2 text-gray-600">
+                Brand :
+                <span class="text-red-500 font-bold uppercase">{{
+                  ProductData().brand.name
+                }}</span>
+              </p>
               <img
                 [src]="ProductData().brand.image"
                 class="ms-2 h-[60px] rounded max-sm:w-[50%] object-contain"
@@ -119,20 +122,22 @@
   </div>
 
   <div
-    class="bg-gray-100 rounded-lg px-4 my-4 py-4 flex items-center justify-between"
+    class="bg-gray-100 gap-1 rounded-lg px-4 my-4 py-4 flex items-center justify-between"
   >
     <div class="">
-      <h3 class="uppercase text-lg font-bold text-[#35AFA0]">
-        recommend related Product
+      <h3 class="uppercase text-xl max-sm:text-sm font-bold text-[#35AFA0]">
+        recommend related Products
       </h3>
-      <p>Do not miss the current offers until the end of March.</p>
+      <p class="text-gray-600 max-sm:text-sm">
+        Do not miss the current offers until the end of March.
+      </p>
     </div>
     <div
-      class="cursor-pointer max-sm:text-xs text-gray-400 group hover:text-gray-500 text-sm text-center my-4 px-4 py-2 border hover:border-gray-500 transition-all duration-300 rounded-full"
+      class="cursor-pointer flex text-gray-400 max-sm:text-xs group hover:text-gray-600 text-sm text-center my-4 px-2 max-sm:w-[25%] py-1 border hover:border-gray-500 transition-all duration-300 rounded-full"
     >
       View All
       <i
-        class="transition-all duration-300 text-gray-400 group-hover:text-gray-500 ms-2 fa-solid fa-arrow-right"
+        class="transition-all duration-300 text-gray-400 group-hover:text-[#35AFA0] ms-2 fa-solid fa-arrow-right"
       ></i>
     </div>
   </div>
