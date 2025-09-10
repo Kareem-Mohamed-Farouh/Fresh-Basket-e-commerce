@@ -22,10 +22,17 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { IWishlist } from '../../../shared/interfaces/Iwishlist';
 import { ToastrService } from 'ngx-toastr';
+import { CardComponent } from '../../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-shop',
-  imports: [AddbtnComponent, SearchPipe, FormsModule, RouterLink],
+  imports: [
+    AddbtnComponent,
+    SearchPipe,
+    FormsModule,
+    RouterLink,
+    CardComponent,
+  ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
