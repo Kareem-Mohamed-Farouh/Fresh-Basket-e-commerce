@@ -8,11 +8,11 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -22,6 +22,7 @@ export class LoginComponent {
   private readonly router = inject(Router);
   userToken: WritableSignal<string> = signal<string>('');
   Token: WritableSignal<string> = signal<string>('');
+  eyeIcon: WritableSignal<boolean> = signal<boolean>(false);
 
   loginForm: FormGroup = this.formBuilder.group({
     email: [null, [Validators.email, Validators.required]],
@@ -30,6 +31,9 @@ export class LoginComponent {
       [Validators.required, Validators.pattern(/^[A-Z]\w{7,}$/)],
     ],
   });
+  showPass(): void {
+    this.eyeIcon.set(!this.eyeIcon());
+  }
 
   submitloginform() {
     if (this.loginForm.valid) {
@@ -39,6 +43,7 @@ export class LoginComponent {
           if (res.message == 'success') {
             this.userToken.set(res.token);
             this.Token.set(this.userToken());
+            this.authService.LogInBtn.set(false);
             localStorage.setItem('basketToken', res.token);
             // this.decode();
             this.router.navigate(['/home']);

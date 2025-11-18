@@ -9,7 +9,7 @@ import { authEndPoint } from '../../base/enums/auth.endpoint';
 })
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
-
+  LogInBtn: WritableSignal<boolean> = signal(true);
   signup(userData: object): Observable<any> {
     return this.httpClient.post(
       `${environment.baseUrl}${authEndPoint.signUp}`,

@@ -52,16 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly pLATFORM_ID = inject(PLATFORM_ID);
   subescribtios: Subscription = new Subscription();
 
-  ngOnInit(): void {
-    this.getAllProductData();
-    this.getALLCategoryData();
-    if (isPlatformBrowser(this.pLATFORM_ID)) {
-      if (localStorage.getItem('basketToken')) {
-        this.getwishlistData();
-      }
-    }
-  }
-
   getAllProductData() {
     this.subescribtios = this.productsService.getAllProducts().subscribe({
       next: (res) => {
@@ -164,6 +154,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
     nav: true,
   };
+
+  ngOnInit(): void {
+    this.getAllProductData();
+    this.getALLCategoryData();
+    if (isPlatformBrowser(this.pLATFORM_ID)) {
+      if (localStorage.getItem('basketToken')) {
+        this.getwishlistData();
+      }
+    }
+  }
+
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
