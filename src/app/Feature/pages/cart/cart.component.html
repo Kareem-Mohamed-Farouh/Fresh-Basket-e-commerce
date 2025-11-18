@@ -1,13 +1,13 @@
 @if(cartData()){
 
-<section class="my-4 px-4 md:px-[2rem] lg:px-[5rem] xl:px-[5rem]">
-  <nav class="flex py-2 text-lg" aria-label="Breadcrumb">
+<section class="my-4 px-4 md:px-[2rem] lg:px-[5rem] xl:px-[13rem]">
+  <nav class="flex py-0 text-lg" aria-label="Breadcrumb">
     <ol
-      class="capitalize inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
+      class="capitalize w-full p-1 shadow-sm inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
     >
       <li routerlink="/home" class="inline-flex items-center">
         <a
-          class="capitalize cursor-pointer inline-flex items-center font-medium text-gray-800 transition-all duration-300 text-xl hover:text-[#35AFA0]"
+          class="capitalize cursor-pointer inline-flex items-center font-medium text-gray-800 transition-all duration-300 text-sm hover:text-[#35AFA0]"
         >
           <svg
             class="w-3 h-3 me-2.5"
@@ -40,14 +40,16 @@
               d="m1 9 4-4-4-4"
             />
           </svg>
-          <a class="capitalize ms-1 font-medium text-gray-800 md:ms-2">cart</a>
+          <a class="capitalize ms-1 font-medium text-sm text-gray-800 md:ms-2"
+            >cart</a
+          >
         </div>
       </li>
       <li aria-current="page"></li>
     </ol>
   </nav>
 
-  <div class="products-in-cart shadow pb-3 p-4 shadow-cyan-500 xl:px-[5rem]">
+  <div class="products-in-cart shadow pb-3 p-4 rounded-xl xl:px-[2rem]">
     <div class="my-2">
       <h1
         class="text-black capitalize text-4xl pt-3 font-extrabold text-center"
@@ -79,18 +81,17 @@
               <h3 class="font-medium text-gray-900 text-wrap">
                 {{ prod.product.title.split(" ", 3).join(" ") }}
               </h3>
-              <span class="text-lg text-green-700">
-                price : {{ prod.price | currency : "GBP" }}
-              </span>
-              <span class="block text-lg text-red-700 font-serif">
-                Total price :
-                {{
-                  prod.count * prod.price + prod.count * prod.price * 0.15
-                    | currency : "GBP"
-                }}
-              </span>
+              <div class="max-sm:flex gap-5">
+                <span class="text-lg text-green-700">
+                  price : {{ prod.price | currency : "USD" }}
+                </span>
+                <span class="block text-lg text-red-700">
+                  Total price :
+                  {{ prod.count * prod.price | currency : "GBP" }}
+                </span>
+              </div>
             </div>
-            <div class="items-center flex max-sm:flex-col gap-2 mb-2">
+            <div class="items-center max-sm:flex flex gap-2 my-3">
               <div class="mx-3 md:text-xl items-center gap-2 flex">
                 <div
                   class="w-full flex justify-between bg-white border border-gray-200 items-center overflow-hidden rounded-full font-medium text-2xl capitalize text-gray-900"
@@ -164,7 +165,7 @@
       </div>
 
       <div class="col-span-2 max-md:col-span-6 order-1 md:order-2 my-4">
-        <div class="">
+        <div class="sm:sticky sm:top-0 sm:top-20 z-[50]">
           <div
             class="bg-white rounded-2xl shadow-lg border border-gray-100 sticky top-8"
           >

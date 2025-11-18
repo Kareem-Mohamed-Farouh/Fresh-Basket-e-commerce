@@ -212,26 +212,6 @@
         >
           <img class="w-5 h-5" src="/images/user.png" alt="" />
         </div>
-        @if(this.authService.LogInBtn()===false){
-
-        <button
-          data-modal-target="popup-modal"
-          data-modal-toggle="popup-modal"
-          class="block text-[#F0FAFF] bg-red-500 transition-all duration-400 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-200 font-medium rounded-lg text-sm px-4 py-2 text-center"
-          type="button"
-        >
-          <i class="fa-solid fa-sign-out"></i>
-        </button>
-        } @if(this.authService.LogInBtn()){
-
-        <button
-          routerLink="/login"
-          class="block text-[#35AFA0] bg-[#F0FAFA] transition-all duration-300 hover:bg-[#35AFA0] hover:text-[#F0FAFF] focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
-          type="button"
-        >
-          <i class="fa-solid fa-sign-in"></i>
-        </button>
-        }
 
         <span class="text-red-600">
           {{ cartService.totalCartPric() | currency : "USD" }}</span
@@ -320,6 +300,26 @@
             >{{ cartService.numOfCartItem() }}</span
           >
         </div>
+        @if(this.authService.LogInBtn()===false){
+
+        <button
+          data-modal-target="popup-modal"
+          data-modal-toggle="popup-modal"
+          class="block text-[#F0FAFF] bg-red-500 transition-all duration-400 hover:bg-red-400 focus:ring-1 focus:outline-none focus:ring-red-200 font-medium rounded-lg text-sm max-sm:px-2 max-sm:py-1 max-sm:text-sm px-4 py-2 text-center"
+          type="button"
+        >
+          <i class="fa-solid fa-sign-out"></i>
+        </button>
+        } @if(this.authService.LogInBtn()){
+
+        <button
+          routerLink="/login"
+          class="block text-[#35AFA0] bg-[#F0FAFA] transition-all duration-300 max-sm:px-2 max-sm:py-1 max-sm:text-sm hover:bg-[#35AFA0] hover:text-[#F0FAFF] focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+          type="button"
+        >
+          <i class="fa-solid fa-sign-in"></i>
+        </button>
+        }
       </div>
     </div>
   </div>
